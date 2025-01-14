@@ -1,0 +1,25 @@
+<%- include('header') %>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Meal Reminders</h2>
+            <form id="reminder-form">
+                <label for="meal-time">Set a Reminder Time:</label>
+                <input type="time" id="meal-time" required>
+
+                <label for="meal-name">Meal Name:</label>
+                <input type="text" id="meal-name" placeholder="Enter meal name (e.g., Breakfast)" required>
+
+                <button type="submit">Set Reminder</button>
+            </form>
+
+            <div id="reminder-list" class="result">
+                <p>Your reminders will appear here:</p>
+                <ul id="reminders">
+                    <!-- List of reminders will appear here dynamically -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <%- include('footer') %>
+

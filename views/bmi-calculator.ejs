@@ -1,0 +1,22 @@
+<%- include('header') %>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>BMI Calculator</h2>
+            <form id="bmi-form">
+                <label for="age">Age:</label>
+                <input type="number" id="age" placeholder="Enter your age" required>
+
+                <label for="height">Height (in cm):</label>
+                <input type="number" id="height" placeholder="Enter your height" required>
+
+                <label for="weight">Weight (in kg):</label>
+                <input type="number" id="weight" placeholder="Enter your weight" required>
+
+                <button type="submit">Calculate BMI</button>
+            </form>
+            <div id="bmi-result" class="result"></div>
+        </div>
+    </div>
+    
+<%- include('footer') %>

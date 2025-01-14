@@ -1,0 +1,20 @@
+<%- include('header') %>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Calorie Tracker</h2>
+            <form id="calorie-form">
+                <label for="calories">Enter Calories Consumed:</label>
+                <input type="number" id="calories" placeholder="Enter calories (e.g., 500)" required>
+                <button type="submit">Add Calories</button>
+            </form>
+            <div id="calorie-summary" class="result">
+                <p>Total Calories Consumed: <span id="total-calories">0</span> kcal</p>
+                <p>Calorie Goal: <span id="calorie-goal">2000</span> kcal</p>
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('footer') %>

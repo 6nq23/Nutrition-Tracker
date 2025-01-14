@@ -1,0 +1,36 @@
+<%- include('header') %>
+
+    <div class="dialog-buttons">
+        <button id="open-confirmation-dialog">Open Confirmation Dialog</button>
+        <button id="open-input-dialog">Open Input Dialog</button>
+        <button id="open-alert-dialog">Open Alert Dialog</button>
+    </div>
+
+    <!-- Confirmation Dialog -->
+    <div id="confirmation-dialog" class="dialog">
+        <div class="dialog-content">
+            <p>Are you sure you want to perform this action?</p>
+            <button id="confirm-yes">Yes</button>
+            <button id="confirm-no">No</button>
+        </div>
+    </div>
+
+    <!-- Input Dialog -->
+    <div id="input-dialog" class="dialog">
+        <div class="dialog-content">
+            <p>Enter a value:</p>
+            <input type="text" id="input-field" placeholder="Type something..." />
+            <button id="submit-input">Submit</button>
+            <button id="close-input-dialog">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Alert Dialog -->
+    <div id="alert-dialog" class="dialog">
+        <div class="dialog-content">
+            <p>Your action was successful!</p>
+            <button id="close-alert-dialog">OK</button>
+        </div>
+    </div>
+    <%- include('footer') %>
+

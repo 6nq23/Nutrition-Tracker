@@ -1,0 +1,32 @@
+<%- include('header') %>
+
+    <div class="container">
+        <h1 class="heading">Meal Selection System</h1>
+
+        <!-- Dropdown for Meal Categories -->
+        <div class="form-group">
+            <label for="categorySelect">Select a Meal Category:</label>
+            <select id="categorySelect" class="dropdown">
+                <option value="" disabled selected>Select a category</option>
+                <option value="vegan">Vegan</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="nonveg">Non-Vegetarian</option>
+            </select>
+        </div>
+
+        <!-- Dropdown for Meals -->
+        <div class="form-group" id="mealDropdownContainer" style="display: none;">
+            <label for="mealSelect">Select a Meal:</label>
+            <select id="mealSelect" class="dropdown">
+                <option value="" disabled selected>Select a meal</option>
+            </select>
+        </div>
+
+        <!-- Meal Information Display -->
+        <div id="mealInfo" class="meal-info" style="display: none;">
+            <h2 id="mealName"></h2>
+            <p><strong>Ingredients:</strong> <span id="mealIngredients"></span></p>
+            <p><strong>Nutrition Information:</strong> <span id="mealNutrition"></span></p>
+        </div>
+    </div>
+    <%- include('footer') %>

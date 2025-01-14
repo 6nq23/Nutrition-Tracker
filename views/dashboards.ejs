@@ -1,0 +1,53 @@
+<%- include('header') %>
+  <header class="dashboard-header">
+    <h1>Welcome to Nutri Track</h1>
+    <p>Your personalized health and fitness tracker</p>
+  </header>
+  <main class="dashboard-main">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+      <h2>Hello, <%= username || 'User' %>!</h2>
+      <p>Track your health and access personalized features below:</p>
+    </section>
+
+
+    <!-- Overview Section -->
+    <section class="overview-section">
+      <h2>Overview</h2>
+      <div class="overview-cards">
+        <div class="card">
+          <h3>BMI</h3>
+          <p>22.5 (Normal)</p>
+        </div>
+        <div class="card">
+          <h3>Calories</h3>
+          <p>1800 kcal</p>
+        </div>
+        <div class="card">
+          <h3>Steps</h3>
+          <p>'7500'</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <h2>Features</h2>
+      <div class="features-grid">
+        <a href="/bmi-calculator" class="feature-card">BMI Calculator</a>
+        <a href="/calorie-tracker" class="feature-card">Calorie Tracker</a>
+        <a href="/meal-selection" class="feature-card">Meal Selection</a>
+        <a href="/diet-plan" class="feature-card">Diet Plan Generator</a>
+        <a href="/meal-reminders" class="feature-card">Meal Reminders</a>
+        <a href="/progress-tracker" class="feature-card">Progress Tracker</a>
+        <a href="/notifications" class="feature-card">Notifications & Alerts</a>
+        <a href="/dark_mode" class="feature-card">Dark Mode/Theme Toggle</a>
+        <a href="/fitness-challenge" class="feature-card">Fitness Challenge</a>
+        <a href="/step-tracker" class="feature-card">Step Tracker</a>
+        <a href="/sleep-tracker" class="feature-card">Sleep Tracker</a>
+        <a href="/water-intake" class="feature-card">Water Intake</a>
+        <a href="/logout" class="feature-card">logout</a>
+      </div>
+    </section>
+  </main>
+<%- include('footer') %>

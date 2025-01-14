@@ -1,0 +1,23 @@
+<%- include('header') %>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Progress Tracker</h2>
+            <form id="progress-form">
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+
+                <label for="value">Progress Value (e.g., Calories or Weight):</label>
+                <input type="number" id="value" placeholder="Enter progress value" required>
+
+                <button type="submit">Add Progress</button>
+            </form>
+
+            <div class="chart-container">
+                <canvas id="progress-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <%- include('footer') %>
+

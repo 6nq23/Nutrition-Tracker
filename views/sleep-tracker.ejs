@@ -1,0 +1,21 @@
+<%- include('header') %>
+
+  <div class="tracker-container">
+    <h1>Sleep Tracker</h1>
+    <p>Track your daily sleep hours and improve your health!</p>
+
+    <!-- Progress Bar Section -->
+    <div class="progress-container">
+      <div class="progress-bar" id="sleep-progress-bar"></div>
+    </div>
+    <p id="sleep-progress-text">0 / 8 hours</p>
+
+    <!-- Input Section -->
+    <div class="input-container">
+      <input type="number" id="sleep-hours" placeholder="Enter hours slept (0-12)">
+      <button id="add-sleep-hours">Add Sleep</button>
+      <button id="reset-sleep">Reset</button>
+    </div>
+  </div>
+  <%- include('footer') %>
+

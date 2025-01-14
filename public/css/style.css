@@ -1,0 +1,1680 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8; /* Light blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container for Form */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Form Styling */
+.form-container {
+    background-color: #ffffff; /* White background for form */
+    padding: 30px 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    color: #007bff; /* Dark Blue */
+}
+
+.form-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    color: #333333;
+    font-weight: bold;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Dark Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #0056b3; /* Slightly darker blue */
+}
+
+.switch-form {
+    margin-top: 15px;
+    color: #555555;
+}
+
+.switch-form a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.switch-form a:hover {
+    text-decoration: underline;
+}
+
+/* Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f9ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Heading */
+h1 {
+    color: #0056b3;
+    margin-bottom: 20px;
+}
+
+/* Input Group */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    font-size: 14px;
+    color: #0056b3;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Button */
+.btn {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #003d80;
+}
+
+/* Result */
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #0056b3;
+    font-weight: bold;
+}
+/* BMI Calculator Form */
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f4f8; /* Light blue background */
+    border-radius: 5px;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.result span {
+    color: #007bff; /* Highlight BMI value */
+}
+
+/* Adjust Form for BMI Calculator */
+#bmi-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#bmi-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Dark Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#bmi-form button:hover {
+    background-color: #0056b3; /* Lighter Blue */
+}
+.result span {
+    color: #007bff; /* Highlighted blue text */
+    font-weight: bold;
+}
+
+
+/*Calorie Tracker Styling */
+#calorie-summary {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f4f8; /* Light blue background */
+    border-radius: 5px;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #007bff; /* Dark Blue */
+    width: 0%; /* Initial value */
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8; /* Light blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container for the Form */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.form-container {
+    background-color: #ffffff; /* White background for the form */
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form-container h2 {
+    color: #007bff; /* Dark blue */
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Dark Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #0056b3; /* Light Blue */
+}
+
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8; /* Light blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.form-container {
+    background-color: #ffffff; /* White background */
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+h2 {
+    color: #007bff; /* Dark Blue */
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Dark Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Light Blue */
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    width: 100%;
+    background-color: #ddd;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%; /* Start with 0% */
+    background-color: #007bff; /* Dark Blue */
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+/* Diet Plan Generator Styling */
+#diet-plan-form input,
+#diet-plan-form select,
+#diet-plan-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f4f8;
+    border-radius: 5px;
+    color: #333;
+    font-size: 18px;
+    text-align: left;
+}
+
+.result span {
+    color: #007bff;
+    font-weight: bold;
+}
+/* Meal Reminder Styling */
+#reminder-form input,
+#reminder-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.result ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.result ul li {
+    padding: 10px;
+    background-color: #f0f4f8;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result ul li span {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.result ul li button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.result ul li button:hover {
+    background-color: #cc0000;
+}
+/* Progress Tracker Styling */
+.chart-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f4f8;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    max-width: 100%;
+    height: 300px;
+}
+/* Notifications Styling */
+.notifications {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f4f8;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.notification button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.notification button:hover {
+    background-color: #cc0000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9; /* Soft gray background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    width: 90%;
+    max-width: 1200px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.dashboard-header {
+    background-color: #042553; /* Dark blue */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.dashboard-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.dashboard-header nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.dashboard-header .nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #0056b3; /* Slightly lighter blue */
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-header .nav-link:hover {
+    background-color: #003580; /* Darker hover effect */
+}
+
+/* Main Content */
+.dashboard-main {
+    flex: 1; /* Pushes footer to the bottom */
+    padding: 20px;
+}
+
+/* Greeting Section */
+.greeting {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.greeting h2 {
+    font-size: 1.8rem;
+    color: #007bff; /* Bright blue */
+}
+
+.greeting p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Overview Section */
+.overview h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 150px;
+}
+
+.stat-card h4 {
+    font-size: 1.2rem;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Quick Actions Section */
+.quick-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.quick-actions h3 {
+    margin-bottom: 20px;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    background-color: #007bff; /* Bright blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.action-btn:hover {
+    background-color: #0056b3; /* Darker hover */
+}
+
+/* Footer */
+.dashboard-footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #0047ab;
+    color: white;
+    font-size: 0.9rem;
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+/* General Styles for Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f4f8; /* Light Gray Background */
+    color: #333333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Button Styles */
+.dialog-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.dialog-buttons button {
+    padding: 10px 20px;
+    background-color: #0056b3; /* Dark Blue */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dialog-buttons button:hover {
+    background-color: #003d80; /* Darker Blue on hover */
+}
+
+/* Dialog Box Styles */
+.dialog {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.dialog-content {
+    background-color: #1e3a5f; /* Dark Blue */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #ffffff; /* White text for contrast */
+    width: 90%;
+    max-width: 400px;
+}
+
+.dialog-content p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #dfe6f1; /* Light Blue text */
+}
+
+.dialog-content button {
+    padding: 10px 20px;
+    background-color: #0056b3; /* Light Blue Button */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.dialog-content button:hover {
+    background-color: #004494; /* Darker Blue on hover */
+}
+
+.dialog-content input {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 80%;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f2f4f8; /* Light Background for Input */
+    color: #333333; /* Dark Text for Input */
+}
+/* Water Intake Tracker Styles */
+.tracker-container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    background-color: #1a1a2e; /* Dark Blue */
+    color: #e6f7ff; /* Light color for text */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tracker-container h1 {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  
+  .progress-container {
+    width: 100%;
+    height: 30px;
+    background-color: #16213e; /* Slightly lighter dark blue */
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #00bcd4; /* Light Blue */
+    transition: width 0.5s ease-in-out;
+  }
+  
+  #progress-text {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+  
+  .input-container button {
+    background-color: #00bcd4; /* Light Blue */
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .input-container button:hover {
+    background-color: #0288d1; /* Darker Blue */
+  }
+  
+  .input-container button:active {
+    background-color: #01579b; /* Even darker blue */
+  }
+  /* Sleep Tracker Specific Styling */
+.tracker-container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background color */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .tracker-container h1 {
+    color: #003366; /* Dark blue */
+    margin-bottom: 15px;
+  }
+  
+  .tracker-container p {
+    color: #424242; /* Neutral text color */
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  /* Progress Bar */
+  .progress-container {
+    width: 100%;
+    height: 30px;
+    background-color: #e0e0e0; /* Light gray for background */
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #4682B4; /* Light blue for progress */
+    transition: width 0.4s ease-in-out;
+  }
+  
+  #sleep-progress-text {
+    font-size: 16px;
+    color: #333; /* Neutral text */
+  }
+  
+  /* Input Section */
+  .input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .input-container input {
+    width: 200px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .input-container button {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: white;
+    background: #1e88e5; /* Dark blue button */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .input-container button:hover {
+    background: #1565c0; /* Darker blue */
+  }
+  
+  #reset-sleep {
+    background: #e53935; /* Red button for reset */
+  }
+  
+  #reset-sleep:hover {
+    background: #c62828; /* Darker red on hover */
+  }
+ /* General styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6fc; /* Light background color */
+    color: #007bff; /* Dark blue text color */
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for the container */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #007bff; /* Dark blue for headings */
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #34495e;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+form input, form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form input:focus {
+    border-color: #007bff; /* Dark blue border on focus */
+    outline: none;
+}
+
+form .form-button {
+    background-color: #007bff; /* Dark blue button */
+    color: #ffffff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+}
+
+form .form-button:hover {
+    background-color: #1a2536; /* Slightly darker blue on hover */
+}
+
+/* Challenge list styling */
+.challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.challenge-card {
+    background-color: #ecf6fc; /* Light blue background for cards */
+    padding: 15px;
+    border: 1px solid #007bff; /* Dark blue border */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.challenge-card h3 {
+    margin: 0;
+    color: #007bff; /* Dark blue for challenge titles */
+}
+
+.challenge-card p {
+    margin: 5px 0;
+}
+
+.challenge-card button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.challenge-card .complete-btn {
+    background-color: #007bff; /* Dark blue for "Complete" button */
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.challenge-card .complete-btn:hover {
+    background-color: #007bff; /* Slightly darker blue on hover */
+}
+
+.challenge-card .remove-btn {
+    background-color: #e74c3c; /* Red for "Remove" button */
+    color: #ffffff;
+}
+
+.challenge-card .remove-btn:hover {
+    background-color: #c0392b; /* Slightly darker red on hover */
+}
+/* Meal Feedback System Styling */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #007bff; /* Dark blue */
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-weight: bold;
+    color: #007bff; /* Dark blue */
+}
+
+form select, form input, form textarea, form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form select:focus, form input:focus, form textarea:focus {
+    border-color: #007bff; /* Dark blue */
+    outline: none;
+}
+
+form button {
+    background-color: #007bff; /* Dark blue */
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+}
+
+form button:hover {
+    background-color: #0056b3; /* Light blue */
+}
+
+/* Feedback List */
+.feedback-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feedback-card {
+    background-color: #f8f9fa; /* Light gray */
+    border: 1px solid #007bff; /* Dark blue border */
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.feedback-card h3 {
+    margin: 0 0 10px;
+    color: #007bff;
+}
+
+.feedback-card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.feedback-card .rating {
+    font-weight: bold;
+    color: #007bff; /* Dark blue for rating */
+}
+/* Notifications and Reminders */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #007bff; /* Dark blue */
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* Reminder Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-weight: bold;
+    color: #007bff; /* Dark blue */
+}
+
+form input, form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+form button {
+    background-color: #007bff; /* Dark blue */
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+}
+
+form button:hover {
+    background-color: #0056b3; /* Light blue */
+}
+
+/* Reminder List */
+.reminder-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reminder-card {
+    background-color: #f8f9fa; /* Light gray */
+    border: 1px solid #007bff; /* Dark blue border */
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.reminder-card h3 {
+    margin: 0;
+    color: #007bff;
+}
+
+.reminder-card p {
+    margin: 5px 0;
+    color: #555;
+}
+/* Common styles for all features */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light background */
+    color: #212529; /* Light text */
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  body.dark-mode {
+    background-color: #212529; /* Dark background */
+    color: #f8f9fa; /* Dark text */
+  }
+  
+  /* Container */
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    transition: background-color 0.3s;
+  }
+  
+  body.dark-mode .container {
+    background-color: #343a40; /* Dark mode container */
+  }
+  
+  /* Heading */
+  h1 {
+    font-size: 2rem;
+    color: #007bff; /* Primary color */
+  }
+  
+  body.dark-mode h1 {
+    color: #0056b3; /* Dark mode primary color */
+  }
+  
+  /* Paragraph */
+  p {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  /* Theme Toggle Button */
+  .theme-toggle-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff; /* Button background */
+    color: #ffffff; /* Button text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .theme-toggle-btn:hover {
+    background-color: #0056b3; /* Hover color */
+  }
+  
+  body.dark-mode .theme-toggle-btn {
+    background-color: #0056b3; /* Dark mode button */
+  }
+  
+  body.dark-mode .theme-toggle-btn:hover {
+    background-color: #f1f6f8; /* Hover color in dark mode */
+  }
+ /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #faf6f6;
+    color: #050505;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  header.app-header {
+    background-color: #f0f0f7;
+    color: rgb(250, 249, 249);
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  header.app-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  header.app-header p {
+    font-size: 1.2rem;
+  }
+  
+  .search-container {
+    flex: 1;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .search-bar {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  #search-form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  #search-input {
+    flex: 1;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #e9e0e0;
+    border-radius: 4px;
+    max-width: 500px;
+  }
+  
+  button[type="submit"] {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: rgb(243, 240, 240);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .results-container {
+    margin-top: 2rem;
+  }
+  
+  .result-item {
+    background-color: #f6efef;
+    border: 1px solid #ece7e7;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .result-item a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .result-item a:hover {
+    color: #0056b3;
+  }
+  
+  .no-results {
+    text-align: center;
+    color: #131313;
+    font-size: 1.2rem;
+  }
+  
+  footer.app-footer {
+    background-color: #f9fafc;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+  }
+  /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #edf4fc;
+    color: #121213;
+    line-height: 1.6;
+  }
+  
+  header.dashboard-header {
+    background-color: #007bff;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  header.dashboard-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  header.dashboard-header p {
+    font-size: 1.2rem;
+  }
+  
+  /* Main Content */
+  .dashboard-main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .welcome-section {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .welcome-section h2 {
+    font-size: 2rem;
+    color: #007bff;
+  }
+  
+  .welcome-section p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  /* Overview Section */
+  .overview-section {
+    margin-bottom: 2rem;
+  }
+  
+  .overview-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .overview-cards {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1.5rem;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h3 {
+    color: #007bff;
+  }
+  
+  .card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  /* Features Section */
+  .features-section {
+    margin-bottom: 2rem;
+  }
+  
+  .features-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .feature-card {
+    display: block;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Footer */
+  footer.dashboard-footer {
+    background-color: #fafafa;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+  
+  /* Dark Mode */
+  body.dark-mode {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  body.dark-mode header.dashboard-header {
+    background-color: #0056b3;
+  }
+  
+  body.dark-mode .card {
+    background-color: #495057;
+    color: white;
+  }
+  
+  body.dark-mode .feature-card {
+    background-color: #495057;
+    color: white;
+  }
+  
+  body.dark-mode .feature-card:hover {
+    background-color: #e8ecef;
+  }
+  
+  body.dark-mode footer.dashboard-footer {
+    background-color: #b1b3b6;
+  }
+  
+  /* Common Styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Admin Panel Styling */
+.admin-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.admin-title {
+  font-size: 28px;
+  color: #0056b3;
+  margin-bottom: 20px;
+}
+
+.admin-add-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.admin-add-btn:hover {
+  background-color: #0056b3;
+}
+
+.admin-subtitle {
+  font-size: 22px;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-table th, .admin-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.admin-table th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.admin-table td {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.admin-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin: 2px;
+}
+
+.admin-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Shared Styles for Nutri Track Application */
+
+/* General Container Styling */
+.container {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styling */
+.heading {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Dropdown Styling */
+.dropdown {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.dropdown:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Meal Info Styling */
+.meal-info {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.meal-info h2 {
+  margin: 0 0 10px;
+  color: #0056b3;
+}
+
+.meal-info p {
+  margin: 5px 0;
+  color: #333;
+}
+
+/* Label Styling */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Form Group Styling */
+.form-group {
+  margin-bottom: 20px;
+}

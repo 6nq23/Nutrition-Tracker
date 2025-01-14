@@ -1,0 +1,30 @@
+<%- include('header') %>
+
+  <header class="app-header">
+    <h1>Search Features</h1>
+    <p>Find and navigate to features in your web application</p>
+  </header>
+
+  <main class="search-container">
+    <!-- Search Bar -->
+    <section class="search-bar">
+      <form id="search-form">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="Search for features (e.g., 'BMI Calculator', 'Dark Mode')" 
+          autocomplete="off"
+          required
+        >
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <!-- Results -->
+    <section id="search-results" class="results-container">
+      <!-- Dynamic results will appear here -->
+    </section>
+  </main>
+
+  <%- include('footer') %>
+

@@ -1,0 +1,24 @@
+<%- include('header') %>
+
+    <div class="container">
+        <h1>Fitness Challenge System</h1>
+        <p>Participate in challenges and track your fitness progress!</p>
+        
+        <form id="challengeForm">
+            <label for="challengeName">Challenge Name:</label>
+            <input type="text" id="challengeName" placeholder="Enter challenge name" required>
+
+            <label for="challengeGoal">Challenge Goal (e.g., 5 km run):</label>
+            <input type="text" id="challengeGoal" placeholder="Enter challenge goal" required>
+
+            <label for="challengeDuration">Duration (in days):</label>
+            <input type="number" id="challengeDuration" placeholder="Enter duration" required>
+
+            <button type="submit" class="form-button">Add Challenge</button>
+        </form>
+
+        <h2>Ongoing Challenges</h2>
+        <div id="challengeList" class="challenge-list"></div>
+    </div>
+    <%- include('footer') %>
+

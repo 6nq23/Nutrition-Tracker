@@ -1,0 +1,32 @@
+<%- include('header') %>
+
+    <div class="container">
+        <h1>Meal Feedback and Rating System</h1>
+        <p>Provide your feedback and rate your meals!</p>
+
+        <!-- Feedback Form -->
+        <form id="feedbackForm">
+            <label for="mealName">Select a Meal:</label>
+            <select id="mealName" required>
+                <option value="" disabled selected>Choose a meal</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snack">Snack</option>
+            </select>
+
+            <label for="rating">Rate the Meal (1-5):</label>
+            <input type="number" id="rating" min="1" max="5" placeholder="Enter rating (1-5)" required>
+
+            <label for="feedback">Your Feedback:</label>
+            <textarea id="feedback" placeholder="Write your feedback here..." rows="4" required></textarea>
+
+            <button type="submit" class="form-button">Submit Feedback</button>
+        </form>
+
+        <h2>Submitted Feedback</h2>
+        <div id="feedbackList" class="feedback-list"></div>
+    </div>
+
+    <%- include('footer') %>
+

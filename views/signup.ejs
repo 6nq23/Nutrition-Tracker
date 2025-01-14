@@ -1,0 +1,19 @@
+<%- include('header') %>
+
+    <div class="container">
+        <h2>Signup</h2>
+        <form action="/auth/signup" method="POST">
+            <label>Username</label>
+            <input type="text" name="username" required>
+            <label>Email</label>
+            <input type="email" name="email" required>
+            <label>Password</label>
+            <input type="password" name="password" required>
+            <label>Confirm Password</label>
+            <input type="password" name="confirmPassword" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+    <%- include('footer') %>
+
