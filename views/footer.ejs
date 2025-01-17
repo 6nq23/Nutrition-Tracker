@@ -198,101 +198,126 @@
             alertDialog.style.display = "none";
         });
         </script>
-    <script>document.getElementById('diet-plan-form').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent form submission
+    <script>document.getElementById('diet-plan-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
     
-        // Get user inputs
-        const calorieGoal = parseInt(document.getElementById('calorie-goal').value);
+        const calorieGoal = document.getElementById('calorie-goal').value;
         const mealPreference = document.getElementById('meal-preference').value;
     
-        // Validate inputs
-        if (isNaN(calorieGoal) || calorieGoal <= 0) {
-            alert('Please enter a valid calorie goal.');
-            return;
-        }
-        if (!mealPreference) {
-            alert('Please select a meal preference.');
+        // Assume we get the userId from some global variable or session
+        const userId = req.user.id; // Replace with actual user ID from your session/cookie or other mechanism
+        // Basic validation
+        if (!calorieGoal || !mealPreference) {
+            alert('Please fill in all the fields.');
             return;
         }
     
-        // Generate a diet plan based on inputs
-        let dietPlan = [];
-        if (mealPreference === 'vegetarian') {
-            dietPlan = [
-                'Breakfast: Oatmeal with fruits (350 kcal)',
-                'Lunch: Grilled veggie salad (500 kcal)',
-                'Snack: Hummus with carrots (150 kcal)',
-                'Dinner: Lentil soup with quinoa (600 kcal)'
-            ];
-        } else if (mealPreference === 'non-vegetarian') {
-            dietPlan = [
-                'Breakfast: Scrambled eggs with toast (400 kcal)',
-                'Lunch: Grilled chicken with rice (600 kcal)',
-                'Snack: Greek yogurt with nuts (200 kcal)',
-                'Dinner: Salmon with roasted veggies (700 kcal)'
-            ];
-        } else if (mealPreference === 'vegan') {
-            dietPlan = [
-                'Breakfast: Smoothie bowl with granola (300 kcal)',
-                'Lunch: Chickpea and avocado salad (500 kcal)',
-                'Snack: Trail mix (200 kcal)',
-                'Dinner: Stir-fried tofu with vegetables (600 kcal)'
-            ];
-        }
+        try {
+            // Sending the data to the server
+            const response = await fetch('/diet-plan/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId, calorieGoal, mealPreference }),
+            });
     
-        // Display the generated diet plan
-        const resultContainer = document.getElementById('diet-plan-result');
-        resultContainer.innerHTML = `
-            <p>Your personalized diet plan for a calorie goal of <span>${calorieGoal} kcal</span>:</p>
-            <ul>
-                ${dietPlan.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-        `;
+            const result = await response.json();
+    
+            if (response.ok) {
+                // Display the generated diet plan
+                const dietPlanResult = document.getElementById('diet-plan-result');
+                dietPlanResult.innerHTML = `<h3>Your Diet Plan:</h3><ul>
+                    ${result.plan.map(meal => `<li>${meal}</li>`).join('')}
+                </ul>`;
+            } else {
+                console.error('Error response:', result);
+                alert(result.message || 'An error occurred while generating the diet plan.');
+            }
+        } catch (error) {
+            console.error('Error generating diet plan:', error);
+            alert('An error occurred while generating the diet plan. Please try again.');
+        }
     });
+    
     </script>
-    <script>// Selecting the form and the challenge list
-        const challengeForm = document.getElementById("challengeForm");
-        const challengeList = document.getElementById("challengeList");
-        
-        // Handle form submission
-        challengeForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-        
-            // Retrieve input values
-            const challengeName = document.getElementById("challengeName").value;
-            const challengeGoal = document.getElementById("challengeGoal").value;
-            const challengeDuration = document.getElementById("challengeDuration").value;
-        
-            // Create a new challenge card
-            const challengeCard = document.createElement("div");
-            challengeCard.className = "challenge-card";
-            challengeCard.innerHTML = `
-                <h3>${challengeName}</h3>
-                <p>Goal: ${challengeGoal}</p>
-                <p>Duration: ${challengeDuration} days</p>
-                <div>
-                    <button class="complete-btn">Mark as Complete</button>
-                    <button class="remove-btn">Remove</button>
-                </div>
-            `;
-        
-            // Add event listeners for buttons
-            challengeCard.querySelector(".complete-btn").addEventListener("click", function () {
-                alert(`Congratulations! You've completed the "${challengeName}" challenge.`);
-                challengeCard.remove();
+    <!-- <script> //fitness challengers 
+        async function fetchChallenges() {
+          try {
+            const response = await fetch('/api/fitness-challenges');
+            const challenges = await response.json();
+            const challengesList = document.getElementById('challenges');
+            challengesList.innerHTML = ''; // Clear existing list
+      
+            challenges.forEach(challenge => {
+              const li = document.createElement('li');
+              li.textContent = `${challenge.name} (${challenge.startDate} - ${challenge.endDate}): ${challenge.goal}`;
+              challengesList.appendChild(li);
             });
-        
-            challengeCard.querySelector(".remove-btn").addEventListener("click", function () {
-                challengeCard.remove();
+          } catch (error) {
+            console.error('Error fetching challenges:', error);
+          }
+        }
+      
+        document.getElementById('join-challenge-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+      
+          const challengeId = document.getElementById('challenge-id').value;
+      
+          try {
+            const response = await fetch('/api/user-challenges', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ challengeId })
             });
-        
-            // Append the challenge card to the list
-            challengeList.appendChild(challengeCard);
-        
-            // Clear form inputs
-            challengeForm.reset();
+      
+            if (response.ok) {
+              alert('Successfully joined the challenge!');
+              document.getElementById('join-challenge-form').reset(); // Clear the form
+            } else {
+              alert('Failed to join the challenge');
+            }
+          } catch (error) {
+            console.error('Error joining challenge:', error);
+          }
         });
-        </script>
+      
+        // Fetch challenges on page load
+        fetchChallenges();
+      </script>
+      <script> // add chanllenges
+        document.getElementById('add-challenge-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+      
+          const name = document.getElementById('challenge-name').value;
+          const description = document.getElementById('challenge-description').value;
+          const startDate = document.getElementById('start-date').value;
+          const endDate = document.getElementById('end-date').value;
+          const goal = document.getElementById('challenge-goal').value;
+      
+          try {
+            const response = await fetch('/api/fitness-challenges', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ name, description, startDate, endDate, goal })
+            });
+      
+            if (response.ok) {
+              alert('Challenge added successfully!');
+              document.getElementById('add-challenge-form').reset(); // Clear the form
+            } else {
+              alert('Failed to add challenge');
+            }
+          } catch (error) {
+            console.error('Error adding challenge:', error);
+          }
+        });
+      </script> -->
+      
 
     <script>// Selecting the form and feedback list
         const feedbackForm = document.getElementById("feedbackForm");

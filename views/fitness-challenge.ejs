@@ -1,24 +1,139 @@
 <%- include('header') %>
 
-    <div class="container">
-        <h1>Fitness Challenge System</h1>
-        <p>Participate in challenges and track your fitness progress!</p>
-        
-        <form id="challengeForm">
-            <label for="challengeName">Challenge Name:</label>
-            <input type="text" id="challengeName" placeholder="Enter challenge name" required>
+<div class="container">
+  <div class="form-container">
+    <h2>Fitness Challenges</h2>
 
-            <label for="challengeGoal">Challenge Goal (e.g., 5 km run):</label>
-            <input type="text" id="challengeGoal" placeholder="Enter challenge goal" required>
-
-            <label for="challengeDuration">Duration (in days):</label>
-            <input type="number" id="challengeDuration" placeholder="Enter duration" required>
-
-            <button type="submit" class="form-button">Add Challenge</button>
-        </form>
-
-        <h2>Ongoing Challenges</h2>
-        <div id="challengeList" class="challenge-list"></div>
+    <!-- List of available challenges -->
+    <div id="challenges-list" class="result">
+      <p>Available challenges: </p>
+      <ul id="challenges">
+        <!-- List of challenges will appear here dynamically -->
+      </ul>
     </div>
-    <%- include('footer') %>
 
+    <!-- Form to add a new fitness challenge -->
+    <h2>Add a New Fitness Challenge</h2>
+    <form id="add-challenge-form">
+      <label for="challenge-name">Challenge Name:</label>
+      <input type="text" id="challenge-name" placeholder="Enter challenge name" required>
+
+      <label for="challenge-description">Description:</label>
+      <textarea id="challenge-description" placeholder="Enter challenge description" required></textarea>
+
+      <label for="start-date">Start Date:</label>
+      <input type="date" id="start-date" required>
+
+      <label for="end-date">End Date:</label>
+      <input type="date" id="end-date" required>
+
+      <label for="challenge-goal">Goal:</label>
+      <input type="text" id="challenge-goal" placeholder="Enter goal (e.g., 10,000 steps per day)" required>
+
+      <button type="submit">Add Challenge</button>
+    </form>
+
+    <!-- Form to join an existing fitness challenge -->
+    <h2>Join a Fitness Challenge</h2>
+    <form id="join-challenge-form">
+      <label for="challenge-id">Enter Challenge ID to Join:</label>
+      <input type="text" id="challenge-id" placeholder="Enter challenge ID" required>
+      <button type="submit">Join Challenge</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Fetch and display available challenges
+  async function fetchChallenges() {
+    try {
+      const response = await fetch('/api/fitness-challenges');
+      const challenges = await response.json();
+      const challengesList = document.getElementById('challenges');
+      challengesList.innerHTML = ''; // Clear existing challenges
+
+      if (challenges.length === 0) {
+        challengesList.innerHTML = '<li>No challenges available.</li>';
+        return;
+      }
+
+      challenges.forEach(challenge => {
+  const li = document.createElement('li');
+  
+  li.innerText = `
+    Challenge Name: ${challenge.name}
+    Date: ${new Date(challenge.startDate).toLocaleDateString()} - ${new Date(challenge.endDate).toLocaleDateString()}
+    Goal: ${challenge.goal}
+    Challenge ID: ${challenge._id}
+  `;
+
+  challengesList.appendChild(li);
+});
+
+    } catch (error) {
+      console.error('Error fetching challenges:', error);
+    }
+  }
+
+  // Handle adding a new challenge
+  document.getElementById('add-challenge-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('challenge-name').value;
+    const description = document.getElementById('challenge-description').value;
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    const goal = document.getElementById('challenge-goal').value;
+
+    try {
+      const response = await fetch('/api/fitness-challenges', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, description, startDate, endDate, goal, })
+      });
+
+      if (response.ok) {
+        alert('Challenge added successfully!');
+        document.getElementById('add-challenge-form').reset(); // Clear the form
+        fetchChallenges(); // Refresh the challenges list
+      } else {
+        alert('Failed to add challenge');
+      }
+    } catch (error) {
+      console.error('Error adding challenge:', error);
+    }
+  });
+
+  // Handle joining a challenge
+  document.getElementById('join-challenge-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const challengeId = document.getElementById('challenge-id').value;
+
+    try {
+      const response = await fetch('/api/user-challenges', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ challengeId })
+      });
+
+      if (response.ok) {
+        alert('Successfully joined the challenge!');
+        document.getElementById('join-challenge-form').reset(); // Clear the form
+      } else {
+        alert('Failed to join the challenge');
+      }
+    } catch (error) {
+      console.error('Error joining challenge:', error);
+    }
+  });
+
+  // Fetch challenges on page load
+  fetchChallenges();
+</script>
+
+<%- include('footer') %>

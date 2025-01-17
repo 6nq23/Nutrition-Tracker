@@ -6,6 +6,9 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const mealRoutes = require('./routes/mealRoutes');
 const mealReminderRoutes = require('./routes/mealreminderRoutes');
+const fitnessChallengeRoutes = require('./routes/fitnesschallengeRoutes');
+const userChallengeRoutes = require('./routes/userchallengeRoutes');
+const dietPlansRoutes = require('./routes/dietplanRoutes');
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -34,6 +37,9 @@ app.use('/auth', authRoutes);
 // Use the meals routes
 app.use('/api/meals', mealRoutes);
 app.use(mealReminderRoutes);
+app.use(fitnessChallengeRoutes);
+app.use(userChallengeRoutes);
+app.use('/diet-plans', dietPlansRoutes);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
