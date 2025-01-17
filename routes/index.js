@@ -1,5 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const {
+    createReminder,
+    getReminders,
+    updateReminder,
+    deleteReminder
+  } = require('../controllers/mealreminderController');
 const isAuthenticated = require('../middleware/isAuthenticated');
 
 
@@ -108,5 +114,12 @@ router.get('/logout', (req, res) => {
         res.redirect('/login');
     });
 });
+
+// Routes for meal reminders
+router.post('/api/meal-reminders', isAuthenticated, createReminder);        // Create a new reminder
+router.get('/api/meal-reminders', isAuthenticated, getReminders);          // Get all reminders
+router.put('/api/meal-reminders/:id', isAuthenticated, updateReminder);    // Update a reminder
+router.delete('/api/meal-reminders/:id', isAuthenticated, deleteReminder); // Delete a reminder
+
 
 module.exports = router;

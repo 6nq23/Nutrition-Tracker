@@ -1,59 +1,55 @@
-const reminderForm = document.getElementById('reminder-form');
-const remindersList = document.getElementById('reminders');
+document.addEventListener('DOMContentLoaded', () => {
+  // Fetch and display reminders
+  async function fetchReminders() {
+    try {
+      const response = await fetch('/api/meal-reminders');
+      const reminders = await response.json();
+      const reminderList = document.getElementById('reminders');
+      reminderList.innerHTML = ''; // Clear existing reminders
 
-// Array to store reminders
-const reminders = [];
-
-// Add a new reminder
-reminderForm.addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent form submission
-
-    const mealTime = document.getElementById('meal-time').value;
-    const mealName = document.getElementById('meal-name').value;
-
-    if (!mealTime || !mealName) {
-        alert('Please fill in both fields.');
+      if (reminders.length === 0) {
+        reminderList.innerHTML = '<li>No reminders set yet.</li>';
         return;
+      }
+
+      reminders.forEach(reminder => {
+        const li = document.createElement('li');
+        li.textContent = `${reminder.mealName} at ${reminder.reminderTime} on ${new Date(reminder.reminderDate).toLocaleDateString()}`;
+        reminderList.appendChild(li);
+      });
+    } catch (error) {
+      console.error('Error fetching reminders:', error);
     }
+  }
 
-    // Add the reminder to the list
-    const reminder = { time: mealTime, name: mealName };
-    reminders.push(reminder);
+  // Handle form submission
+  document.getElementById('reminder-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    // Display the reminder
-    updateRemindersUI();
+    const mealName = document.getElementById('meal-name').value;
+    const reminderTime = document.getElementById('meal-time').value;
+    const reminderDate = document.getElementById('meal-date').value;
 
-    // Clear the input fields
-    reminderForm.reset();
-});
+    try {
+      const response = await fetch('/api/meal-reminders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ mealName, reminderTime, reminderDate })
+      });
 
-// Update the reminders list in the UI
-function updateRemindersUI() {
-    remindersList.innerHTML = ''; // Clear the list
+      if (response.ok) {
+        alert('Reminder created successfully!');
+        fetchReminders(); // Refresh the reminders list
+        document.getElementById('reminder-form').reset(); // Clear the form
+      } else {
+        alert('Failed to create reminder');
+      }
+    } catch (error) {
+      console.error('Error creating reminder:', error);
+    }
+  });
 
-    reminders.forEach((reminder, index) => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <span>${reminder.name} at ${reminder.time}</span>
-            <button onclick="deleteReminder(${index})">Delete</button>
-        `;
-        remindersList.appendChild(listItem);
-    });
-}
-
-// Delete a reminder
-function deleteReminder(index) {
-    reminders.splice(index, 1);
-    updateRemindersUI();
-}
-
-// Check reminders every minute
-setInterval(function () {
-    const currentTime = new Date().toTimeString().slice(0, 5); // Current time in HH:MM format
-
-    reminders.forEach(reminder => {
-        if (reminder.time === currentTime) {
-            alert(`Reminder: It's time for your ${reminder.name}!`);
-        }
-    });
-}, 60000); // Check every 60 seconds
+  // Fetch reminders on page load
+  fetchReminders(); });

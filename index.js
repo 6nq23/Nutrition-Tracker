@@ -4,7 +4,8 @@ const MongoStore = require('connect-mongo');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
-
+const mealRoutes = require('./routes/mealRoutes');
+const mealReminderRoutes = require('./routes/mealreminderRoutes');
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -30,7 +31,9 @@ app.use(express.static('public'));
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 app.use('/auth', authRoutes);
-
+// Use the meals routes
+app.use('/api/meals', mealRoutes);
+app.use(mealReminderRoutes);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
