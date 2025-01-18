@@ -1,27 +1,134 @@
 <%- include('header') %>
 
+<style>
+  /* CSS for Diet Plan Generator */
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+
+  .form-container {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  select, button, input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  .result {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .result ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .result li {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+  }
+</style>
+
 <div class="container">
-    <div class="form-container">
-        <h2>Diet Plan Generator</h2>
-        <form id="diet-plan-form">
-            <label for="calorie-goal">Daily Calorie Goal (kcal):</label>
-            <input type="number" id="calorie-goal" placeholder="Enter your calorie goal (e.g., 2000)" required>
+  <div class="form-container">
+    <h2>Diet Plan Generator</h2>
+    <form id="diet-plan-form">
+      <label for="goal">Select Your Goal:</label>
+      <select id="goal" required>
+        <option value="">--Select Goal--</option>
+        <option value="Weight Loss">Weight Loss</option>
+        <option value="Weight Gain">Weight Gain</option>
+        <option value="Maintenance">Maintenance</option>
+      </select>
 
-            <label for="meal-preference">Meal Preference:</label>
-            <select id="meal-preference" required>
-                <option value="" disabled selected>Select a preference</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="non-vegetarian">Non-Vegetarian</option>
-                <option value="vegan">Vegan</option>
-            </select>
+      <label for="diet-type">Select Your Diet Type:</label>
+      <select id="diet-type" required>
+        <option value="">--Select Diet Type--</option>
+        <option value="Veg">Veg</option>
+        <option value="Non-Veg">Non-Veg</option>
+        <option value="Vegan">Vegan</option>
+      </select>
 
-            <button type="submit">Generate Plan</button>
-        </form>
+      <button type="submit">Generate Diet Plan</button>
+    </form>
 
-        <div id="diet-plan-result" class="result">
-            <!-- Diet plan will be displayed here -->
-        </div>
-    </div>
+    <div id="diet-plan-result" class="result"></div>
+  </div>
 </div>
+
+<script>
+  document.getElementById('diet-plan-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const goal = document.getElementById('goal').value;
+    const dietType = document.getElementById('diet-type').value;
+
+    if (!goal || !dietType) {
+      alert('Please select both goal and diet type.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/diet-plan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ goal, dietType })
+      });
+
+      if (response.ok) {
+        const { dietPlan } = await response.json();
+        const resultDiv = document.getElementById('diet-plan-result');
+        resultDiv.innerHTML = `
+          <h3>Generated Diet Plan</h3>
+          <p><strong>Goal:</strong> ${dietPlan.goal}</p>
+          <p><strong>Diet Type:</strong> ${dietPlan.dietType}</p>
+          <p><strong>Total Calories:</strong> ${dietPlan.totalCalories} kcal</p>
+          <ul>
+            ${dietPlan.meals.map(meal => `
+              <li>
+                <strong>${meal.mealName}:</strong>
+                <p>Items: ${meal.items.join(', ')}</p>
+                <p>Calories: ${meal.calories} kcal</p>
+              </li>
+            `).join('')}
+          </ul>
+        `;
+      } else {
+        alert('Failed to generate diet plan.');
+      }
+    } catch (error) {
+      console.error('Error generating diet plan:', error);
+    }
+  });
+</script>
 
 <%- include('footer') %>

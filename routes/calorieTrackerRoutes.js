@@ -10,7 +10,7 @@ const router = express.Router();
 // Add a new calorie entry
 router.post('/api/calorie-tracker', isAuthenticated, addCalorieEntry);
 
-// Get total calories consumed for the day
+// Get total calories for the day
 router.get('/api/calorie-tracker', isAuthenticated, getDailyCalories);
 
 module.exports = router;

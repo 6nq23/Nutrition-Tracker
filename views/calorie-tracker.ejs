@@ -1,10 +1,77 @@
 <%- include('header') %>
 
+<style>
+  /* CSS for Calorie Tracker */
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+
+  .form-container {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  .result {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .progress-bar-container {
+    margin-top: 10px;
+    background-color: #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 20px;
+  }
+
+  .progress-bar {
+    background-color: #4CAF50;
+    height: 100%;
+    width: 0;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    font-size: 12px;
+    transition: width 0.3s ease-in-out;
+  }
+</style>
+
 <div class="container">
   <div class="form-container">
     <h2>Calorie Tracker</h2>
 
-    <!-- Form to Add Calorie Entry -->
+    <!-- Form to Add Calories -->
     <form id="calorie-form">
       <label for="calories">Enter Calories Consumed:</label>
       <input 
@@ -12,13 +79,12 @@
         id="calories" 
         placeholder="Enter calories (e.g., 500)" 
         required 
-        min="0" 
-        step="1"
+        min="0"
       />
       <button type="submit">Add Calories</button>
     </form>
 
-    <!-- Calorie Summary Section -->
+    <!-- Calorie Summary -->
     <div id="calorie-summary" class="result">
       <p>
         <strong>Total Calories Consumed Today:</strong> 
@@ -38,12 +104,13 @@
 </div>
 
 <script>
+  // JavaScript for Calorie Tracker
   document.addEventListener('DOMContentLoaded', () => {
     const calorieGoal = 2000; // Set the default calorie goal
     const progressBar = document.getElementById('progress-bar');
     const totalCaloriesElement = document.getElementById('total-calories');
 
-    // Fetch daily calories on page load
+    // Fetch total calories on page load
     async function fetchDailyCalories() {
       try {
         const response = await fetch('/api/calorie-tracker');

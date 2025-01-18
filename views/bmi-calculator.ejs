@@ -1,22 +1,154 @@
 <%- include('header') %>
 
+<title>BMI Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            animation: slideUp 0.5s ease-out;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff; /* Updated theme color */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #4b5563;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #007bff; /* Updated theme color */
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Updated theme color */
+        }
+        button {
+            padding: 12px;
+            background-color: #007bff; /* Updated theme color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker shade for hover */
+        }
+        .result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            color: #007bff; /* Updated theme color */
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
     <div class="container">
-        <div class="form-container">
-            <h2>BMI Calculator</h2>
-            <form id="bmi-form">
-                <label for="age">Age:</label>
-                <input type="number" id="age" placeholder="Enter your age" required>
+        <h2>BMI Calculator</h2>
+        <form id="bmi-form">
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="Enter your age" required>
 
-                <label for="height">Height (in cm):</label>
-                <input type="number" id="height" placeholder="Enter your height" required>
+            <label for="height">Height (in cm):</label>
+            <input type="number" id="height" placeholder="Enter your height" required>
 
-                <label for="weight">Weight (in kg):</label>
-                <input type="number" id="weight" placeholder="Enter your weight" required>
+            <label for="weight">Weight (in kg):</label>
+            <input type="number" id="weight" placeholder="Enter your weight" required>
 
-                <button type="submit">Calculate BMI</button>
-            </form>
-            <div id="bmi-result" class="result"></div>
-        </div>
+            <button type="submit">Calculate BMI</button>
+        </form>
+        <div id="bmi-result" class="result"></div>
     </div>
-    
+
+<script>
+  document.getElementById('bmi-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const age = parseInt(document.getElementById('age').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const weight = parseFloat(document.getElementById('weight').value);
+
+    if (isNaN(age) || isNaN(height) || isNaN(weight) || age <= 0 || height <= 0 || weight <= 0) {
+      alert('Please enter valid age, height, and weight values.');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/bmi', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ age, height, weight })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const { bmi, category, recommendation } = data.data;
+
+        document.getElementById('bmi-result').innerHTML = `
+          Your BMI is <span>${bmi}</span> (${category}).<br>
+          Recommendation: <span>${recommendation}</span>
+        `;
+      } else {
+        const error = await response.json();
+        alert(`Error: ${error.error}`);
+      }
+    } catch (error) {
+      console.error('Error calculating BMI:', error);
+    }
+  });
+</script>
+
 <%- include('footer') %>

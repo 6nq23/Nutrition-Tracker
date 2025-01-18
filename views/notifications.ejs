@@ -1,12 +1,101 @@
 <%- include('header') %>
 
-    <div class="container">
-        <div class="form-container">
-            <h2>Notifications & Alerts</h2>
-            <button id="trigger-notification" class="btn">Trigger Notification</button>
-            <div id="notifications-container" class="notifications">
-                <!-- Notifications will appear here dynamically -->
-            </div>
+<div class="container">
+    <div class="form-container">
+        <h2>Notifications & Alerts</h2>
+        <button id="trigger-notification" class="btn">Trigger Notification</button>
+        <div id="notifications-container" class="notifications">
+            <!-- Notifications will appear here dynamically -->
         </div>
     </div>
-    <%- include('header') %>
+</div>
+
+<%- include('footer') %>
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f8fb;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 25px 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .form-container {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    padding: 12px 25px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+
+  .notifications {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f0f8ff;
+    border: 1px solid #b0c4de;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .notification-item {
+    background-color: #e0f7fa;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 5px solid #007bff;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const notificationButton = document.getElementById("trigger-notification");
+    const notificationsContainer = document.getElementById("notifications-container");
+
+    notificationButton.addEventListener("click", function() {
+      // Create new notification element
+      const notificationItem = document.createElement("div");
+      notificationItem.classList.add("notification-item");
+      notificationItem.textContent = "New notification triggered!";
+
+      // Append notification to the container
+      notificationsContainer.appendChild(notificationItem);
+
+      // Automatically remove notification after 5 seconds
+      setTimeout(() => {
+        notificationItem.remove();
+      }, 5000);
+    });
+  });
+</script>

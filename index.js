@@ -8,11 +8,15 @@ const mealRoutes = require('./routes/mealRoutes');
 const mealReminderRoutes = require('./routes/mealreminderRoutes');
 const fitnessChallengeRoutes = require('./routes/fitnesschallengeRoutes');
 const userChallengeRoutes = require('./routes/userchallengeRoutes');
-const dietPlansRoutes = require('./routes/dietplanRoutes');
+// const dietPlansRoutes = require('./routes/dietplanRoutes');
+const dietPlanRoutes = require('./routes/dietplanRoutes');
 const sleepTrackerRoutes = require('./routes/sleeptrackerRoutes');
 const stepTrackerRoutes = require('./routes/steptrackerRoutes');
 const mealSelectorRoutes = require('./routes/mealRoutes');
+// const calorieTrackerRoutes = require('./routes/calorieTrackerRoutes');
 const calorieTrackerRoutes = require('./routes/calorieTrackerRoutes');
+const waterTrackerRoutes = require('./routes/waterTrackerRoutes');
+const bmiRoutes = require('./routes/bmiRoutes');
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -43,13 +47,17 @@ app.use('/api/meals', mealRoutes);
 app.use(mealReminderRoutes);
 app.use(fitnessChallengeRoutes);
 app.use(userChallengeRoutes);
-app.use('/diet-plans', dietPlansRoutes);
+// app.use('/diet-plans', dietPlansRoutes);
+app.use(dietPlanRoutes);
+app.use(calorieTrackerRoutes);
 app.use(sleepTrackerRoutes);
 app.use(stepTrackerRoutes);
 app.use(mealSelectorRoutes);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api/calorie-tracker', calorieTrackerRoutes);
+app.use(waterTrackerRoutes);
+app.use(bmiRoutes);
+// app.use('/api/calorie-tracker', calorieTrackerRoutes);
 
 // Start server
 const PORT = 3000;

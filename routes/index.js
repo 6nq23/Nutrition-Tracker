@@ -11,7 +11,12 @@ const isAuthenticated = require('../middleware/isAuthenticated');
 
 router.get('/', (req, res) => {
     const username = req.user ? req.user.username : null; // Assuming you have user details from session or DB
-    res.render('dashboards', { username });  // Send userName to the template
+    res.render('index', { username });  // Send userName to the template
+});
+
+router.get('/dashboard', isAuthenticated, (req, res) => {
+    // const username = req.user.username;
+    res.render('dashboard', { username: req.user.username });  // Send userName to the template
 });
 
 router.get('/bmi-calculator', isAuthenticated, (req, res) => {
@@ -111,7 +116,7 @@ router.get('/logout', (req, res) => {
         }
         res.clearCookie('connect.sid');
         console.log("logout done")
-        res.redirect('/login');
+        res.redirect('/');
     });
 });
 

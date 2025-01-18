@@ -1,8 +1,174 @@
-<%- include('header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f8fb;
+      color: #333;
+    }
+
+    /* Header Styles */
+    .dashboard-header {
+      text-align: center;
+      padding: 50px 0;
+      background-color: #E6E6FA;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .dashboard-header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    /* Main Section */
+    .dashboard-main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    /* Welcome Section */
+    .welcome-section h2 {
+      font-size: 2.5rem;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .welcome-section p {
+      font-size: 1.2rem;
+    }
+
+    /* Overview Section */
+    .overview-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    .overview-cards {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 30%;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Features Section */
+    .features-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    .features-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .feature-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 22%;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: #007bff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    /* Hover Effects */
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Footer Styles */
+    .dashboard-footer {
+      text-align: center;
+      background-color: #E6E6FA;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .dashboard-footer p {
+      color: #333;
+      font-size: 1rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .overview-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+
+      .features-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .feature-card {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Animations */
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
   <header class="dashboard-header">
     <h1>Welcome to Nutri Track</h1>
     <p>Your personalized health and fitness tracker</p>
   </header>
+
+  <!-- Main Content Section -->
   <main class="dashboard-main">
     <!-- Welcome Section -->
     <section class="welcome-section">
@@ -10,22 +176,21 @@
       <p>Track your health and access personalized features below:</p>
     </section>
 
-
     <!-- Overview Section -->
     <section class="overview-section">
       <h2>Overview</h2>
       <div class="overview-cards">
-        <div class="card">
+        <div class="card animate_animated animate_fadeInLeft">
           <h3>BMI</h3>
           <p>22.5 (Normal)</p>
         </div>
-        <div class="card">
+        <div class="card animate_animated animate_fadeInUp">
           <h3>Calories</h3>
           <p>1800 kcal</p>
         </div>
-        <div class="card">
+        <div class="card animate_animated animate_fadeInRight">
           <h3>Steps</h3>
-          <p>'7500'</p>
+          <p>7500</p>
         </div>
       </div>
     </section>
@@ -34,20 +199,60 @@
     <section class="features-section">
       <h2>Features</h2>
       <div class="features-grid">
-        <a href="/bmi-calculator" class="feature-card">BMI Calculator</a>
-        <a href="/calorie-tracker" class="feature-card">Calorie Tracker</a>
-        <a href="/meal-selection" class="feature-card">Meal Selection</a>
-        <a href="/diet-plan" class="feature-card">Diet Plan Generator</a>
-        <a href="/meal-reminders" class="feature-card">Meal Reminders</a>
-        <a href="/progress-tracker" class="feature-card">Progress Tracker</a>
-        <a href="/notifications" class="feature-card">Notifications & Alerts</a>
-        <a href="/dark_mode" class="feature-card">Dark Mode/Theme Toggle</a>
-        <a href="/fitness-challenge" class="feature-card">Fitness Challenge</a>
-        <a href="/step-tracker" class="feature-card">Step Tracker</a>
-        <a href="/sleep-tracker" class="feature-card">Sleep Tracker</a>
-        <a href="/water-intake" class="feature-card">Water Intake</a>
-        <a href="/logout" class="feature-card">logout</a>
+        <a href="/bmi-calculator" class="feature-card animate_animated animate_zoomIn">
+          <h3>BMI Calculator</h3>
+        </a>
+        <a href="/calorie-tracker" class="feature-card animate_animated animate_zoomIn">
+          <h3>Calorie Tracker</h3>
+        </a>
+        <a href="/meal-selection" class="feature-card animate_animated animate_zoomIn">
+          <h3>Meal Selection</h3>
+        </a>
+        <a href="/diet-plan" class="feature-card animate_animated animate_zoomIn">
+          <h3>Diet Plan Generator</h3>
+        </a>
+        <a href="/meal-reminders" class="feature-card animate_animated animate_zoomIn">
+          <h3>Meal Reminders</h3>
+        </a>
+        <a href="/progress-tracker" class="feature-card animate_animated animate_zoomIn">
+          <h3>Progress Tracker</h3>
+        </a>
+        <a href="/notifications" class="feature-card animate_animated animate_zoomIn">
+          <h3>Notifications & Alerts</h3>
+        </a>
+        <a href="/dark_mode" class="feature-card animate_animated animate_zoomIn">
+          <h3>Dark Mode/Theme Toggle</h3>
+        </a>
+        <a href="/fitness-challenge" class="feature-card animate_animated animate_zoomIn">
+          <h3>Fitness Challenge</h3>
+        </a>
+        <a href="/step-tracker" class="feature-card animate_animated animate_zoomIn">
+          <h3>Step Tracker</h3>
+        </a>
+        <a href="/sleep-tracker" class="feature-card animate_animated animate_zoomIn">
+          <h3>Sleep Tracker</h3>
+        </a>
+        <a href="/water-intake" class="feature-card animate_animated animate_zoomIn">
+          <h3>Water Intake</h3>
+        </a>
+        <a href="/logout" class="feature-card animate_animated animate_zoomIn">
+          <h3>Logout</h3>
+        </a>
       </div>
     </section>
   </main>
-<%- include('footer') %>
+
+  <!-- Footer Section -->
+  <footer class="dashboard-footer">
+    <p>&copy; 2025 Nutri Track. All rights reserved.</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Optional JavaScript for additional interactivity, if needed
+    document.addEventListener("DOMContentLoaded", () => {
+      // Custom JS functionality can be added here
+    });
+  </script>
+</body>
+</html>

@@ -1,32 +1,37 @@
+const mongoose = require('mongoose'); // Ensure this is included
 const CalorieTracker = require('../models/CalorieTracker');
 
 // Add a calorie entry
 exports.addCalorieEntry = async (req, res) => {
   try {
     const { caloriesConsumed } = req.body;
-    const userId = req.user.id; // Get user ID from authentication middleware
+    const userId = req.user.id;
+
+    if (!caloriesConsumed || caloriesConsumed <= 0) {
+      return res.status(400).json({ error: 'Invalid calorie value.' });
+    }
 
     const calorieEntry = new CalorieTracker({ userId, caloriesConsumed });
     await calorieEntry.save();
 
-    res.status(201).json({ message: 'Calorie entry added successfully', calorieEntry });
+    res.status(201).json({ message: 'Calorie entry added successfully.', calorieEntry });
   } catch (error) {
     console.error('Error adding calorie entry:', error);
-    res.status(500).json({ error: 'Failed to add calorie entry' });
+    res.status(500).json({ error: 'Failed to add calorie entry.' });
   }
 };
 
-// Get total calories consumed for the day
+// Get total calories for the day
 exports.getDailyCalories = async (req, res) => {
   try {
     const userId = req.user.id;
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Start of the day
+    today.setHours(0, 0, 0, 0);
 
     const totalCalories = await CalorieTracker.aggregate([
       {
         $match: {
-          userId: mongoose.Types.ObjectId(userId),
+          userId: new mongoose.Types.ObjectId(userId), // Correct usage of mongoose.Types.ObjectId
           date: { $gte: today }
         }
       },
@@ -41,6 +46,6 @@ exports.getDailyCalories = async (req, res) => {
     res.status(200).json({ totalCalories: totalCalories[0]?.totalCalories || 0 });
   } catch (error) {
     console.error('Error fetching daily calories:', error);
-    res.status(500).json({ error: 'Failed to fetch daily calories' });
+    res.status(500).json({ error: 'Failed to fetch daily calories.' });
   }
 };

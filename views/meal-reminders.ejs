@@ -1,30 +1,133 @@
-<%- include('header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Reminders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        .dashboard-footer{
+          position: fixed;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff; /* Theme color */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #4b5563;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #007bff; /* Theme color */
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Theme color */
+        }
+        button {
+            padding: 12px;
+            background-color: #007bff; /* Theme color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker shade for hover */
+            transform: scale(1.03);
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f9fafb;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+        li span {
+            color: #007bff; /* Theme color */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Meal Reminders</h2>
 
-<div class="container">
-  <div class="form-container">
-    <h2>Meal Reminders</h2>
+        <!-- Form to create a new reminder -->
+        <form id="reminder-form">
+            <label for="meal-time">Set a Reminder Time:</label>
+            <input type="time" id="meal-time" required>
 
-    <!-- Form to create a new reminder -->
-    <form id="reminder-form">
-      <label for="meal-time">Set a Reminder Time:</label>
-      <input type="time" id="meal-time" required>
+            <label for="meal-date">Set a Reminder Date:</label>
+            <input type="date" id="meal-date" required>
 
-      <label for="meal-date">Set a Reminder Date:</label>
-      <input type="date" id="meal-date" required>
+            <label for="meal-name">Meal Name:</label>
+            <input type="text" id="meal-name" placeholder="Enter meal name (e.g., Breakfast)" required>
 
-      <label for="meal-name">Meal Name:</label>
-      <input type="text" id="meal-name" placeholder="Enter meal name (e.g., Breakfast)" required>
+            <button type="submit">Set Reminder</button>
+        </form>
 
-      <button type="submit">Set Reminder</button>
-    </form>
-
-    <!-- Section to display reminders -->
-    <div id="reminder-list" class="result">
-      <p>Your reminders will appear here:</p>
-      <ul id="reminders">
-        <!-- List of reminders will appear here dynamically -->
-      </ul>
-    </div>
-  </div>
-</div>
+        <!-- Section to display reminders -->
+        <div id="reminder-list" class="result">
+            <p>Your reminders will appear here:</p>
+            <ul id="reminders">
+                <!-- List of reminders will appear here dynamically -->
+            </ul>
+        </div>
 <%- include('footer') %>
