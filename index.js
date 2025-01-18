@@ -9,6 +9,10 @@ const mealReminderRoutes = require('./routes/mealreminderRoutes');
 const fitnessChallengeRoutes = require('./routes/fitnesschallengeRoutes');
 const userChallengeRoutes = require('./routes/userchallengeRoutes');
 const dietPlansRoutes = require('./routes/dietplanRoutes');
+const sleepTrackerRoutes = require('./routes/sleeptrackerRoutes');
+const stepTrackerRoutes = require('./routes/steptrackerRoutes');
+const mealSelectorRoutes = require('./routes/mealRoutes');
+const calorieTrackerRoutes = require('./routes/calorieTrackerRoutes');
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -40,8 +44,12 @@ app.use(mealReminderRoutes);
 app.use(fitnessChallengeRoutes);
 app.use(userChallengeRoutes);
 app.use('/diet-plans', dietPlansRoutes);
+app.use(sleepTrackerRoutes);
+app.use(stepTrackerRoutes);
+app.use(mealSelectorRoutes);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/calorie-tracker', calorieTrackerRoutes);
 
 // Start server
 const PORT = 3000;

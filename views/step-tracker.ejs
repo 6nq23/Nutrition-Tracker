@@ -1,21 +1,87 @@
 <%- include('header') %>
 
-  <div class="tracker-container">
-    <h1>Step Tracker</h1>
-    <p>Keep track of your steps and stay active!</p>
+<div class="container">
+  <div class="form-container">
+    <h2>Step Tracker</h2>
 
-    <!-- Progress Section -->
-    <div class="progress-container">
-      <div class="progress-bar" id="step-progress-bar"></div>
-    </div>
-    <p id="step-progress-text">0 / 10000 steps</p>
+    <!-- Form to add a new step entry -->
+    <form id="step-form">
+      <label for="step-date">Date:</label>
+      <input type="date" id="step-date" required>
 
-    <!-- Input Section -->
-    <div class="input-container">
-      <button id="add-steps-1000">+1000 Steps</button>
-      <button id="add-steps-500">+500 Steps</button>
-      <button id="reset-steps">Reset</button>
+      <label for="step-count">Steps:</label>
+      <input type="number" id="step-count" min="0" required>
+
+      <button type="submit">Add Entry</button>
+    </form>
+
+    <!-- List of step entries -->
+    <div id="step-entries">
+      <h3>Your Step Entries</h3>
+      <ul id="entries-list">
+        <!-- Step entries will be dynamically populated here -->
+      </ul>
     </div>
   </div>
-  <%- include('footer') %>
+</div>
 
+<script>
+  // Fetch and display step entries
+  async function fetchStepEntries() {
+    try {
+      const response = await fetch('/api/step-tracker');
+      const entries = await response.json();
+      const entriesList = document.getElementById('entries-list');
+      entriesList.innerHTML = ''; // Clear existing entries
+
+      if (entries.length === 0) {
+        entriesList.innerHTML = '<li>No step entries yet.</li>';
+        return;
+      }
+
+      entries.forEach(entry => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <strong>Date:</strong> ${new Date(entry.date).toLocaleDateString()} <br>
+          <strong>Steps:</strong> ${entry.steps}
+        `;
+        entriesList.appendChild(li);
+      });
+    } catch (error) {
+      console.error('Error fetching step entries:', error);
+    }
+  }
+
+  // Handle form submission to add a new step entry
+  document.getElementById('step-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const date = document.getElementById('step-date').value;
+    const steps = document.getElementById('step-count').value;
+
+    try {
+      const response = await fetch('/api/step-tracker', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ date, steps })
+      });
+
+      if (response.ok) {
+        alert('Step entry added successfully!');
+        document.getElementById('step-form').reset();
+        fetchStepEntries(); // Refresh the list of entries
+      } else {
+        alert('Failed to add step entry');
+      }
+    } catch (error) {
+      console.error('Error adding step entry:', error);
+    }
+  });
+
+  // Fetch entries on page load
+  fetchStepEntries();
+</script>
+
+<%- include('footer') %>

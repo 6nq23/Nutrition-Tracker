@@ -1,32 +1,97 @@
 <%- include('header') %>
 
-    <div class="container">
-        <h1 class="heading">Meal Selection System</h1>
+<div class="container">
+  <div class="form-container">
+    <h2>Meal Selector</h2>
 
-        <!-- Dropdown for Meal Categories -->
-        <div class="form-group">
-            <label for="categorySelect">Select a Meal Category:</label>
-            <select id="categorySelect" class="dropdown">
-                <option value="" disabled selected>Select a category</option>
-                <option value="vegan">Vegan</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="nonveg">Non-Vegetarian</option>
-            </select>
-        </div>
+    <!-- Step 1: Select Category -->
+    <form id="category-form">
+      <label for="category">Select a Category:</label>
+      <select id="category" required>
+        <option value="">--Select--</option>
+        <option value="Veg">Veg</option>
+        <option value="Non-Veg">Non-Veg</option>
+        <option value="Vegan">Vegan</option>
+      </select>
+      <button type="submit">Find Meals</button>
+    </form>
 
-        <!-- Dropdown for Meals -->
-        <div class="form-group" id="mealDropdownContainer" style="display: none;">
-            <label for="mealSelect">Select a Meal:</label>
-            <select id="mealSelect" class="dropdown">
-                <option value="" disabled selected>Select a meal</option>
-            </select>
-        </div>
-
-        <!-- Meal Information Display -->
-        <div id="mealInfo" class="meal-info" style="display: none;">
-            <h2 id="mealName"></h2>
-            <p><strong>Ingredients:</strong> <span id="mealIngredients"></span></p>
-            <p><strong>Nutrition Information:</strong> <span id="mealNutrition"></span></p>
-        </div>
+    <!-- Step 2: Display Meals -->
+    <div id="meal-list" class="hidden">
+      <h3>Select a Meal</h3>
+      <ul id="meals"></ul>
     </div>
-    <%- include('footer') %>
+
+    <!-- Step 3: Display Meal Details -->
+    <div id="meal-details" class="hidden">
+      <h3>Meal Details</h3>
+      <p><strong>Ingredients:</strong> <span id="ingredients"></span></p>
+      <p><strong>Nutrition Information:</strong></p>
+      <ul>
+        <li><strong>Calories:</strong> <span id="calories"></span></li>
+        <li><strong>Protein:</strong> <span id="protein"></span></li>
+        <li><strong>Carbs:</strong> <span id="carbs"></span></li>
+        <li><strong>Fat:</strong> <span id="fat"></span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Handle category selection
+  document.getElementById('category-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const category = document.getElementById('category').value;
+
+    try {
+      const response = await fetch(`/api/meals?category=${category}`);
+      const meals = await response.json();
+      
+      if (!response.ok) {
+        alert(meals.error);
+        return;
+      }
+
+      const mealList = document.getElementById('meals');
+      mealList.innerHTML = ''; // Clear existing meals
+
+      meals.forEach(meal => {
+        const li = document.createElement('li');
+        li.textContent = meal.name;
+        li.setAttribute('data-id', meal._id); // Store meal ID for selection
+        li.style.cursor = 'pointer';
+        li.addEventListener('click', () => fetchMealDetails(meal._id)); // Attach event listener
+        mealList.appendChild(li);
+      });
+
+      document.getElementById('meal-list').classList.remove('hidden'); // Show meal list
+    } catch (error) {
+      console.error('Error fetching meals:', error);
+    }
+  });
+
+  // Fetch and display meal details
+  async function fetchMealDetails(mealId) {
+    try {
+      const response = await fetch(`/api/meals/${mealId}`);
+      const meal = await response.json();
+
+      if (!response.ok) {
+        alert(meal.error);
+        return;
+      }
+
+      document.getElementById('ingredients').textContent = meal.ingredients.join(', ');
+      document.getElementById('calories').textContent = meal.nutrition.calories + ' kcal';
+      document.getElementById('protein').textContent = meal.nutrition.protein + ' g';
+      document.getElementById('carbs').textContent = meal.nutrition.carbs + ' g';
+      document.getElementById('fat').textContent = meal.nutrition.fat + ' g';
+
+      document.getElementById('meal-details').classList.remove('hidden'); // Show meal details
+    } catch (error) {
+      console.error('Error fetching meal details:', error);
+    }
+  }
+</script>
+
+<%- include('footer') %>
