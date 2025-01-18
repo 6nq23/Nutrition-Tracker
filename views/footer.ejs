@@ -49,43 +49,6 @@
         document.getElementById('bmi-result').innerHTML = result;
     });
     </script>
-    <script>document.getElementById('calorie-form').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent form submission
-    
-        // Fetch calorie input
-        const caloriesInput = document.getElementById('calories');
-        const calorieValue = parseFloat(caloriesInput.value);
-    
-        // Validation
-        if (isNaN(calorieValue) || calorieValue <= 0) {
-            alert('Please enter a valid calorie value.');
-            return;
-        }
-    
-        // Update total calories and progress
-        const totalCaloriesElem = document.getElementById('total-calories');
-        const calorieGoalElem = document.getElementById('calorie-goal');
-        const progressBar = document.getElementById('progress-bar');
-    
-        const currentTotal = parseFloat(totalCaloriesElem.textContent);
-        const calorieGoal = parseFloat(calorieGoalElem.textContent);
-    
-        const newTotal = currentTotal + calorieValue;
-        totalCaloriesElem.textContent = newTotal;
-    
-        // Update progress bar
-        const progressPercentage = Math.min((newTotal / calorieGoal) * 100, 100); // Max 100%
-        progressBar.style.width = progressPercentage + '%';
-    
-        // Clear input field
-        caloriesInput.value = '';
-    
-        // Notify user if goal is reached
-        if (newTotal >= calorieGoal) {
-            alert('Congratulations! You have reached your calorie goal!');
-        }
-    });
-    </script>
     <script>const themeToggleBtn = document.getElementById("themeToggle");
 
         // Function to toggle dark mode
@@ -613,73 +576,6 @@
         }, 10000);
     </script>
 
-    <script>// Initialize empty progress data
-        const progressData = {
-            labels: [], // Dates
-            values: []  // Progress values
-        };
-        
-        // Get form and chart elements
-        const progressForm = document.getElementById('progress-form');
-        const progressChartCtx = document.getElementById('progress-chart').getContext('2d');
-        
-        // Create the chart
-        let progressChart = new Chart(progressChartCtx, {
-            type: 'line',
-            data: {
-                labels: progressData.labels,
-                datasets: [{
-                    label: 'Progress Over Time',
-                    data: progressData.values,
-                    borderColor: '#007bff',
-                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
-                    borderWidth: 2,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Value'
-                        }
-                    }
-                }
-            }
-        });
-        
-        // Handle form submission
-        progressForm.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form submission
-        
-            const date = document.getElementById('date').value;
-            const value = parseFloat(document.getElementById('value').value);
-        
-            if (!date || isNaN(value) || value <= 0) {
-                alert('Please enter valid date and progress value.');
-                return;
-            }
-        
-            // Add data to progressData
-            progressData.labels.push(date);
-            progressData.values.push(value);
-        
-            // Update the chart
-            progressChart.update();
-        
-            // Clear form
-            progressForm.reset();
-        });
-        </script>
 
     <script>// Database of Features and Their Corresponding Pages
         const features = [

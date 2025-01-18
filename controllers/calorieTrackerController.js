@@ -1,4 +1,4 @@
-const mongoose = require('mongoose'); // Ensure this is included
+const mongoose = require('mongoose');
 const CalorieTracker = require('../models/CalorieTracker');
 
 // Add a calorie entry
@@ -31,7 +31,7 @@ exports.getDailyCalories = async (req, res) => {
     const totalCalories = await CalorieTracker.aggregate([
       {
         $match: {
-          userId: new mongoose.Types.ObjectId(userId), // Correct usage of mongoose.Types.ObjectId
+          userId: new mongoose.Types.ObjectId(userId),
           date: { $gte: today }
         }
       },

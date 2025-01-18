@@ -1,23 +1,222 @@
-<%- include('header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Tracker</title>
+  <style>
+    /* Base styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #4fbf56, #002fff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-    <div class="container">
-        <div class="form-container">
-            <h2>Progress Tracker</h2>
-            <form id="progress-form">
-                <label for="date">Date:</label>
-                <input type="date" id="date" required>
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease;
+    }
 
-                <label for="value">Progress Value (e.g., Calories or Weight):</label>
-                <input type="number" id="value" placeholder="Enter progress value" required>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-                <button type="submit">Add Progress</button>
-            </form>
+    /* Form container */
+    .form-container {
+      text-align: center;
+    }
 
-            <div class="chart-container">
-                <canvas id="progress-chart"></canvas>
-            </div>
-        </div>
+    h2 {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    label {
+      font-size: 1rem;
+      color: #555;
+      font-weight: 600;
+      display: block;
+      margin: 15px 0 5px;
+    }
+
+    input {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px;
+      margin: 10px auto 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      transition: all 0.3s ease;
+      display: block;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    input:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+      outline: none;
+    }
+
+    button {
+      padding: 14px 30px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .chart-container {
+      margin-top: 40px;
+    }
+
+    canvas {
+      width: 100% !important;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h2>Progress Tracker</h2>
+      <form id="progress-form">
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+
+        <label for="value">Progress Value (e.g., Calories or Weight):</label>
+        <input type="number" id="value" placeholder="Enter progress value" required>
+
+        <button type="submit">Add Progress</button>
+      </form>
+
+      <div class="chart-container">
+        <canvas id="progress-chart"></canvas>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <%- include('footer') %>
+  </div>
 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const progressForm = document.getElementById('progress-form');
+    const progressChart = document.getElementById('progress-chart').getContext('2d');
+
+    // Initialize Chart.js
+    let chartInstance;
+
+    async function fetchProgress() {
+      try {
+        const response = await fetch('/api/progress');
+        const progressData = await response.json();
+
+        const labels = progressData.map(entry => new Date(entry.date).toLocaleDateString());
+        const data = progressData.map(entry => entry.value);
+
+        // Update the chart
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
+
+        chartInstance = new Chart(progressChart, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Progress Over Time',
+              data: data,
+              borderColor: '#4CAF50',
+              fill: false,
+              tension: 0.1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true
+              }
+            }
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching progress data:', error);
+      }
+    }
+
+    // Handle form submission
+    progressForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const date = document.getElementById('date').value;
+      const value = parseFloat(document.getElementById('value').value);
+
+      try {
+        const response = await fetch('/api/progress', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ date, value })
+        });
+
+        if (response.ok) {
+          alert('Progress added successfully!');
+          progressForm.reset();
+          fetchProgress();
+        } else {
+          const error = await response.json();
+          alert(`Failed to add progress: ${error.error}`);
+        }
+      } catch (error) {
+        console.error('Error adding progress:', error);
+      }
+    });
+
+    // Fetch progress data on page load
+    fetchProgress();
+  });
+</script>
+
+<%- include('footer') %>

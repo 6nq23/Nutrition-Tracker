@@ -132,10 +132,9 @@
     document.getElementById('calorie-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const calories = document.getElementById('calories').value;
-
-      if (!calories) {
-        alert('Please enter the calories consumed.');
+      const calories = parseInt(document.getElementById('calories').value, 10);
+      if (isNaN(calories) || calories <= 0) {
+        alert('Please enter a valid number greater than 0 for calories consumed.');
         return;
       }
 

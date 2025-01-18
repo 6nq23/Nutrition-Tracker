@@ -17,6 +17,7 @@ const mealSelectorRoutes = require('./routes/mealRoutes');
 const calorieTrackerRoutes = require('./routes/calorieTrackerRoutes');
 const waterTrackerRoutes = require('./routes/waterTrackerRoutes');
 const bmiRoutes = require('./routes/bmiRoutes');
+const progressRoutes = require('./routes/progressRoutes');
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -57,6 +58,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(waterTrackerRoutes);
 app.use(bmiRoutes);
+app.use(progressRoutes);
 // app.use('/api/calorie-tracker', calorieTrackerRoutes);
 
 // Start server
