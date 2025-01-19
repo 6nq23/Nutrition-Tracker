@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
 
         // Save the user ID in the session
         req.session.userId = user._id;
-        res.status(200).render('dashboards', { username });  // Redirect to dashboard after login
+        res.status(200).redirect('/dashboard');  // Redirect to dashboard after login
         console.log("Login successful");
     } catch (error) {
         res.status(500).send('Error logging in: ' + error.message);

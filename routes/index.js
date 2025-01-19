@@ -6,7 +6,9 @@ const {
     updateReminder,
     deleteReminder
   } = require('../controllers/mealreminderController');
+const { getDashboardData } = require('../controllers/dashboardController');
 const isAuthenticated = require('../middleware/isAuthenticated');
+const { updateTheme } = require('../controllers/themesettingController')
 
 
 router.get('/', (req, res) => {
@@ -14,9 +16,9 @@ router.get('/', (req, res) => {
     res.render('index', { username });  // Send userName to the template
 });
 
-router.get('/dashboard', isAuthenticated, (req, res) => {
+router.get('/dashboard', isAuthenticated, getDashboardData, (req, res) => {
     // const username = req.user.username;
-    res.render('dashboard', { username: req.user.username });  // Send userName to the template
+    res.render('dashboards', { username: req.user.username });  // Send userName to the template
 });
 
 router.get('/bmi-calculator', isAuthenticated, (req, res) => {
@@ -53,6 +55,8 @@ router.get('/login', (req, res) => {
     const userName = req.user ? req.user.username : null; // Assuming you have user details from session or DB
     res.render('login', { userName });  // Send userName to the template
 });
+
+router.post('/api/theme', isAuthenticated, updateTheme);
 
 router.get('/meal-feedback',isAuthenticated, (req, res) => {
     const userName = req.user ? req.user.username : null; // Assuming you have user details from session or DB

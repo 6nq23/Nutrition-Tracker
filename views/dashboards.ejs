@@ -6,7 +6,7 @@
   <title>Dashboard</title>
   <style>
     /* General Styles */
-    body {
+    body.light {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
@@ -134,6 +134,25 @@
       font-size: 1rem;
     }
 
+    body.dark {
+      background-color: #121212;
+      color: #0880f0;
+    }
+
+    .toggle-button{
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
     /* Responsive Styles */
     @media (max-width: 768px) {
       .overview-cards {
@@ -157,11 +176,15 @@
       }
     }
 
+    .overview-section p{
+      font-size: 1.7rem;
+    }
+
     /* Animations */
     @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
   </style>
 </head>
-<body>
+<body class= "<%= theme %>" >
   <!-- Header Section -->
   <header class="dashboard-header">
     <h1>Welcome to Nutri Track</h1>
@@ -182,15 +205,15 @@
       <div class="overview-cards">
         <div class="card animate_animated animate_fadeInLeft">
           <h3>BMI</h3>
-          <p>200</p>
+          <p><%= bmi %></p>
         </div>
         <div class="card animate_animated animate_fadeInUp">
           <h3>Calories</h3>
-          <p>200</p>
+          <p><%= calories %></p>
         </div>
         <div class="card animate_animated animate_fadeInRight">
           <h3>Steps</h3>
-          <p>7500</p>
+          <p><%= steps %></p>
         </div>
       </div>
     </section>
@@ -242,16 +265,41 @@
     </section>
   </main>
 
+  <div class="toggle-button">
+    <button id="theme-toggle">Toggle Dark Mode</button>
+  </div>
+
   <!-- Footer Section -->
   <footer class="dashboard-footer">
     <p>&copy; 2025 Nutri Track. All rights reserved.</p>
   </footer>
-
-  <!-- JS -->
   <script>
-    // Optional JavaScript for additional interactivity, if needed
-    document.addEventListener("DOMContentLoaded", () => {
-      // Custom JS functionality can be added here
+    const themeToggle = document.getElementById('theme-toggle');
+
+    themeToggle.addEventListener('click', async () => {
+      // Get the current theme
+      const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+
+      // Toggle theme locally
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.body.className = newTheme;
+
+      // Save the new theme preference to the server
+      try {
+        const response = await fetch('/api/theme', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ theme: newTheme })
+        });
+
+        if (!response.ok) {
+          alert('Failed to save theme preference');
+        }
+      } catch (error) {
+        console.error('Error saving theme preference:', error);
+      }
     });
   </script>
 </body>
