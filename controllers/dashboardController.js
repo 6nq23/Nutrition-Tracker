@@ -28,7 +28,7 @@ exports.getDashboardData = async (req, res) => {
 
     // Pass data to the dashboard
     res.render('dashboards', {
-      username: req.session.username, // Assuming the username is stored in the session
+      user: user ? user.username: 'NA', // Assuming the username is stored in the session
       calories: latestCalories ? latestCalories.caloriesConsumed : 'N/A',
       steps: latestSteps ? latestSteps.steps : 'N/A',
       bmi: latestBMI ? latestBMI.bmi : 'N/A',

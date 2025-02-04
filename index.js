@@ -1,9 +1,11 @@
 const express = require('express');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+require('./cronJobs/emailReminderJob');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
+const searchRoutes = require('./routes/searchRoutes');
 const mealRoutes = require('./routes/mealRoutes');
 const mealReminderRoutes = require('./routes/mealreminderRoutes');
 const fitnessChallengeRoutes = require('./routes/fitnesschallengeRoutes');
@@ -17,6 +19,7 @@ const waterTrackerRoutes = require('./routes/waterTrackerRoutes');
 const bmiRoutes = require('./routes/bmiRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -52,6 +55,8 @@ app.use(calorieTrackerRoutes);
 app.use(sleepTrackerRoutes);
 app.use(stepTrackerRoutes);
 app.use(mealSelectorRoutes);
+app.use(feedbackRoutes);
+app.use(searchRoutes);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(waterTrackerRoutes);

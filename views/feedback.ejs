@@ -1,0 +1,165 @@
+<%- include('header') %>
+
+<style>
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+
+  .form-container {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .result {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  .feedback-list {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 5px;
+  }
+
+  .feedback-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .rating {
+    color: gold;
+  }
+</style>
+
+<div class="container">
+  <div class="form-container">
+    <h2>Submit Your Feedback</h2>
+    <form id="feedback-form">
+      <label for="feedbackText">Your Feedback:</label>
+      <textarea id="feedbackText" placeholder="Write your feedback here..." required></textarea>
+
+      <label for="rating">Rating:</label>
+      <select id="rating">
+        <option value="5">⭐⭐⭐⭐⭐ (5 - Excellent)</option>
+        <option value="4">⭐⭐⭐⭐ (4 - Good)</option>
+        <option value="3">⭐⭐⭐ (3 - Average)</option>
+        <option value="2">⭐⭐ (2 - Poor)</option>
+        <option value="1">⭐ (1 - Bad)</option>
+      </select>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div class="result" id="feedback-result"></div>
+  </div>
+
+  <div class="feedback-list">
+    <h2>Previous Feedback</h2>
+    <div id="feedbacks"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const feedbackForm = document.getElementById('feedback-form');
+    const feedbackResult = document.getElementById('feedback-result');
+    const feedbackContainer = document.getElementById('feedbacks');
+
+    // Fetch and display all feedback
+    async function fetchFeedback() {
+      try {
+        const response = await fetch('/api/feedback');
+        const feedbacks = await response.json();
+
+        feedbackContainer.innerHTML = ''; // Clear previous feedbacks
+
+        if (feedbacks.length === 0) {
+          feedbackContainer.innerHTML = '<p>No feedback submitted yet.</p>';
+        } else {
+          feedbacks.forEach(feedback => {
+            const div = document.createElement('div');
+            div.classList.add('feedback-item');
+            div.innerHTML = `
+              <p><strong>${feedback.userId.username}:</strong></p>
+              <p>${feedback.feedbackText}</p>
+              <p class="rating">Rating: ${'⭐'.repeat(feedback.rating)}</p>
+              <p><small>${new Date(feedback.createdAt).toLocaleString()}</small></p>
+            `;
+            feedbackContainer.appendChild(div);
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching feedback:', error);
+      }
+    }
+
+    // Submit Feedback
+    feedbackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const feedbackText = document.getElementById('feedbackText').value;
+      const rating = document.getElementById('rating').value;
+
+      try {
+        const response = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ feedbackText, rating })
+        });
+
+        if (response.ok) {
+          feedbackResult.innerHTML = '<p style="color: green;">Feedback submitted successfully!</p>';
+          feedbackForm.reset();
+          fetchFeedback(); // Refresh feedback list
+        } else {
+          const errorData = await response.json();
+          feedbackResult.innerHTML = `<p style="color: red;">Error: ${errorData.error}</p>`;
+        }
+      } catch (error) {
+        console.error('Error submitting feedback:', error);
+        feedbackResult.innerHTML = '<p style="color: red;">Failed to submit feedback.</p>';
+      }
+    });
+
+    fetchFeedback(); // Load existing feedback on page load
+  });
+</script>
+
+<%- include('footer') %>

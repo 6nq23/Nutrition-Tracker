@@ -1,0 +1,66 @@
+<%- include('header') %>
+
+<style>
+  .container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+  }
+  input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  #reminder-list {
+    margin-top: 20px;
+  }
+</style>
+
+<div class="container">
+  <h2>Set Water Drinking Reminder</h2>
+  
+  <form id="reminder-form">
+    <label for="reminder-time">Select Reminder Time:</label>
+    <input type="time" id="reminder-time" required>
+    <button type="submit">Set Reminder</button>
+  </form>
+
+  <h3>Your Reminders:</h3>
+  <ul id="reminder-list"></ul>
+</div>
+
+<script>
+    document.getElementById('reminder-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+  
+      const userId = "<%= userId %>"; // Fetch userId from EJS
+      const reminderTime = document.getElementById('reminder-time').value;
+  
+      if (!reminderTime) {
+        alert('Please select a time.');
+        return;
+      }
+  
+      try {
+        const response = await fetch('/api/email-reminder', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId, reminderTime })
+        });
+  
+        const data = await response.json();
+        
+        if (response.ok) {
+          alert('Reminder set successfully!');
+          fetchReminders();
+        } else {
+          alert(`Failed to set reminder: ${data.error}`);
+        }
+      } catch (error) {
+        console.error('Error setting reminder:', error);
+        alert('Failed to set reminder.');
+      }
+    });
+  </script>
+  
+<%- include('footer') %>

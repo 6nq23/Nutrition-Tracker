@@ -9,6 +9,7 @@ const {
 const { getDashboardData } = require('../controllers/dashboardController');
 const isAuthenticated = require('../middleware/isAuthenticated');
 const { updateTheme } = require('../controllers/themesettingController')
+const User = require('../models/Users'); // Import the User model
 
 
 router.get('/', (req, res) => {
@@ -21,9 +22,20 @@ router.get('/dashboard', isAuthenticated, getDashboardData, (req, res) => {
     res.render('dashboards', { username: req.user.username });  // Send userName to the template
 });
 
+router.get('/feedback', isAuthenticated, (req, res) => {
+    // const username = req.user.username;
+    res.render('feedback', { username: req.user.username });  // Send userName to the template
+});
+
 router.get('/bmi-calculator', isAuthenticated, (req, res) => {
     // const username = req.user.username;
     res.render('bmi-calculator', { username: req.user.username });  // Send userName to the template
+});
+
+router.get('/email-reminder', isAuthenticated, async(req, res) => {
+    const userId = req.session.userId;
+    const user = await User.findById(userId);
+    res.render('email-reminder',  { userId: user._id });  // Send userName to the template
 });
 
 router.get('/dark_mode', isAuthenticated, (req, res) => {

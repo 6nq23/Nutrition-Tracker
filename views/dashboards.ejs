@@ -179,7 +179,7 @@
     .overview-section p{
       font-size: 1.7rem;
     }
-
+    
     /* Animations */
     @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
   </style>
@@ -195,7 +195,7 @@
   <main class="dashboard-main">
     <!-- Welcome Section -->
     <section class="welcome-section">
-      <h2>Hello, <%= username || 'User' %>!</h2>
+      <h2>Hello, <%= user || 'User' %>!</h2>
       <p>Track your health and access personalized features below:</p>
     </section>
 
@@ -217,11 +217,15 @@
         </div>
       </div>
     </section>
-
     <!-- Features Section -->
     <section class="features-section">
       <h2>Features</h2>
       <div class="features-grid">
+
+        <a href="/admin" class="feature-card animate_animated animate_zoomIn">
+          <h3>Admin</h3>
+        </a>
+
         <a href="/bmi-calculator" class="feature-card animate_animated animate_zoomIn">
           <h3>BMI Calculator</h3>
         </a>
@@ -258,6 +262,17 @@
         <a href="/water-intake" class="feature-card animate_animated animate_zoomIn">
           <h3>Water Intake</h3>
         </a>
+        <a href="/water-intake" class="feature-card animate_animated animate_zoomIn">
+          <h3>Water Intake</h3>
+        </a>
+        <a href="/feedback" class="feature-card animate_animated animate_zoomIn">
+          <h3>FeedBack</h3>
+        </a>
+
+        <a href="/email-reminder" class="feature-card animate_animated animate_zoomIn">
+          <h3>Email Reminder</h3>
+        </a>
+
         <a href="/logout" class="feature-card animate_animated animate_zoomIn">
           <h3>Logout</h3>
         </a>
