@@ -1,16 +1,11 @@
 const express = require('express');
-const {
-  addWaterEntry,
-  getDailyWaterIntake
-} = require('../controllers/waterTrackerController');
+const waterController = require('../controllers/waterTrackerController');
 const isAuthenticated = require('../middleware/isAuthenticated');
 
 const router = express.Router();
 
-// Add a water intake entry
-router.post('/api/water-intake', isAuthenticated, addWaterEntry);
-
-// Get total water intake for the day
-router.get('/api/water-intake', isAuthenticated, getDailyWaterIntake);
+router.get('/api/water-intake', waterController.getWaterIntake, isAuthenticated);
+router.post('/api/water-intake', waterController.addWaterIntake, isAuthenticated);
+router.post('/reset', waterController.resetWaterIntake, isAuthenticated);
 
 module.exports = router;

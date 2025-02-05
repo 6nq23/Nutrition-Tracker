@@ -20,6 +20,7 @@ const bmiRoutes = require('./routes/bmiRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
+const favicon = require("serve-favicon");
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -36,6 +37,9 @@ app.use(session({
     saveUninitialized: false,   // Don't create a session until something is stored
     cookie: { secure: false }   // Set 'secure' to true in production (HTTPS only)
 }));
+
+// app.use(favicon(path.join(__dirname, "public", "img")));
+
 
 // Set EJS
 app.set('view engine', 'ejs');

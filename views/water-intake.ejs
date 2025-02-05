@@ -82,6 +82,8 @@
   }
 </style>
 
+<%- include('header') %>
+
 <div class="container">
   <div class="form-container">
     <h2>Water Intake Tracker</h2>
@@ -89,14 +91,7 @@
     <!-- Form to Add Water Intake -->
     <form id="water-intake-form">
       <label for="water-intake">Enter Water Consumed (ml):</label>
-      <input 
-        type="number" 
-        id="water-intake" 
-        placeholder="Enter amount (e.g., 250)" 
-        required 
-        min="0" 
-        step="50" 
-      />
+      <input type="number" id="water-intake" placeholder="Enter amount (e.g., 250)" required min="0" step="50" />
       <button type="submit">Add Water Intake</button>
     </form>
 
@@ -113,9 +108,7 @@
       </div>
 
       <!-- Congratulations Message -->
-      <p id="goal-message" class="goal-message">
-        🎉 Congratulations! You reached your daily water intake goal! 🎉
-      </p>
+      <p id="goal-message" class="goal-message">🎉 Congratulations! You reached your daily water intake goal! 🎉</p>
 
       <!-- Reset Button -->
       <button id="reset-button">Reset</button>
@@ -124,105 +117,40 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const dailyGoal = 3000; // Set the daily water intake goal
-    const progressBar = document.getElementById('progress-bar');
-    const totalWaterElement = document.getElementById('total-water');
-    const lastWaterElement = document.getElementById('last-water');
-    const waterLeftElement = document.getElementById('water-left');
-    const goalMessage = document.getElementById('goal-message');
-    const resetButton = document.getElementById('reset-button');
+  document.addEventListener('DOMContentLoaded', async () => {
+  async function fetchWaterIntake() {
+    const response = await fetch('/api/water-intake');
+    const data = await response.json();
 
-    // Fetch total water intake on page load
-    async function fetchWaterIntake() {
-      try {
-        const response = await fetch('/api/water-intake');
-        const data = await response.json();
+    document.getElementById('last-water').textContent = data.lastWater;
+    document.getElementById('total-water').textContent = data.totalWater;
+    document.getElementById('water-left').textContent = data.waterLeft;
 
-        const totalWater = data.totalWater || 0;
-        const lastWater = data.lastWater || 0;
-        const waterLeft = Math.max(dailyGoal - totalWater, 0); 
+    const progress = Math.min((data.totalWater / 3000) * 100, 100);
+    document.getElementById('progress-bar').style.width = `${progress}%`;
+    document.getElementById('progress-bar').textContent = `${progress.toFixed(1)}%`;
+  }
 
-        totalWaterElement.textContent = totalWater;
-        lastWaterElement.textContent = lastWater;
-        waterLeftElement.textContent = waterLeft;
+  document.getElementById('water-intake-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const waterIntake = parseInt(document.getElementById('water-intake').value, 10);
 
-        // Update progress bar
-        const progress = Math.min((totalWater / dailyGoal) * 100, 100);
-        progressBar.style.width = `${progress}%`;
-        progressBar.textContent = `${progress.toFixed(1)}%`;
-
-        // Check if goal is reached
-        if (totalWater >= dailyGoal) {
-          goalMessage.style.display = 'block';
-          resetButton.style.display = 'block';
-        } else {
-          goalMessage.style.display = 'none';
-          resetButton.style.display = 'none';
-        }
-      } catch (error) {
-        console.error('Error fetching water intake:', error);
-      }
-    }
-
-    // Handle form submission to add water intake
-    document.getElementById('water-intake-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const waterIntake = parseInt(document.getElementById('water-intake').value, 10);
-
-      if (!waterIntake || waterIntake <= 0) {
-        alert('Please enter a valid water intake amount.');
-        return;
-      }
-
-      try {
-        const response = await fetch('/api/water-intake', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ waterConsumed: waterIntake })
-        });
-
-        if (response.ok) {
-          alert('Water intake entry added successfully!');
-          document.getElementById('water-intake-form').reset();
-          fetchWaterIntake(); // Refresh water intake summary
-        } else {
-          const error = await response.json();
-          alert(`Failed to add water intake: ${error.error}`);
-        }
-      } catch (error) {
-        console.error('Error adding water intake:', error);
-      }
+    await fetch('/api/water-intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ waterConsumed: waterIntake })
     });
 
-    // Handle Reset Button
-    resetButton.addEventListener('click', async () => {
-      try {
-        const response = await fetch('/api/water-intake/reset', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          alert('Water intake has been reset!');
-          fetchWaterIntake();
-        } else {
-          const error = await response.json();
-          alert(`Failed to reset water intake: ${error.error}`);
-        }
-      } catch (error) {
-        console.error('Error resetting water intake:', error);
-      }
-    });
-
-    // Initial fetch
     fetchWaterIntake();
   });
+
+  document.getElementById('reset-button').addEventListener('click', async () => {
+    await fetch('/api/water-intake/reset', { method: 'POST' });
+    fetchWaterIntake();
+  });
+
+  fetchWaterIntake();
+});
 </script>
 
 <%- include('footer') %>

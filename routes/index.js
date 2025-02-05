@@ -17,6 +17,11 @@ router.get('/', (req, res) => {
     res.render('index', { username });  // Send userName to the template
 });
 
+router.get('/admin', (req, res) => {
+    const username = req.user ? req.user.username : null; // Assuming you have user details from session or DB
+    res.render('admin', { username });  // Send userName to the template
+});
+
 router.get('/dashboard', isAuthenticated, getDashboardData, (req, res) => {
     // const username = req.user.username;
     res.render('dashboards', { username: req.user.username });  // Send userName to the template

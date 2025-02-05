@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
-const waterTrackerSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  waterConsumed: { type: Number, required: true }, // Water consumed in ml
-  date: { type: Date, default: Date.now } // Date of entry
+const waterIntakeSchema = new mongoose.Schema({
+  totalWater: { type: Number, default: 0 },
+  lastWater: { type: Number, default: 0 },
+  dailyGoal: { type: Number, default: 3000 },
+  date: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('WaterTracker', waterTrackerSchema);
+module.exports = mongoose.model('WaterIntake', waterIntakeSchema);

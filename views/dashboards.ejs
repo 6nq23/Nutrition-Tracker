@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
+  <link rel="icon" type="image/png" href="public/image.png">
+
   <style>
     /* General Styles */
     body.light {
@@ -217,6 +219,12 @@
         </div>
       </div>
     </section>
+
+    <div class="search-container" style="text-align: center; margin-bottom: 20px;">
+      <input type="text" id="search-bar" placeholder="Search features..." style="padding: 10px; width: 80%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc;">
+      <button id="search-button">Search</button>
+    </div>
+
     <!-- Features Section -->
     <section class="features-section">
       <h2>Features</h2>
@@ -258,9 +266,6 @@
         </a>
         <a href="/sleep-tracker" class="feature-card animate_animated animate_zoomIn">
           <h3>Sleep Tracker</h3>
-        </a>
-        <a href="/water-intake" class="feature-card animate_animated animate_zoomIn">
-          <h3>Water Intake</h3>
         </a>
         <a href="/water-intake" class="feature-card animate_animated animate_zoomIn">
           <h3>Water Intake</h3>
@@ -317,5 +322,22 @@
       }
     });
   </script>
+
+<script>
+  document.getElementById('search-bar').addEventListener('input', function() {
+    let searchQuery = this.value.toLowerCase();
+    let featureCards = document.querySelectorAll('.feature-card');
+
+    featureCards.forEach(card => {
+      let featureName = card.textContent.toLowerCase();
+      if (featureName.includes(searchQuery)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>
+
 </body>
 </html>

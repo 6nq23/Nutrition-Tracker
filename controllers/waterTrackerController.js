@@ -1,46 +1,38 @@
-const WaterTracker = require('../models/WaterTracker');
+const WaterIntake = require('../models/WaterTracker');
 
-// Add a water intake entry
-exports.addWaterEntry = async (req, res) => {
+exports.getWaterIntake = async (req, res) => {
   try {
-    const { waterConsumed } = req.body;
-    const userId = req.user.id;
-
-    const waterEntry = new WaterTracker({ userId, waterConsumed });
-    await waterEntry.save();
-
-    res.status(201).json({ message: 'Water intake entry added successfully', waterEntry });
+    const intake = await WaterIntake.findOne().sort({ date: -1 });
+    res.json(intake || { totalWater: 0, lastWater: 0, dailyGoal: 3000 });
   } catch (error) {
-    console.error('Error adding water intake entry:', error);
-    res.status(500).json({ error: 'Failed to add water intake entry' });
+    res.status(500).json({ error: 'Error fetching water intake' });
   }
 };
 
-// Get total water intake for the day
-exports.getDailyWaterIntake = async (req, res) => {
+exports.addWaterIntake = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const { waterConsumed } = req.body;
+    let intake = await WaterIntake.findOne().sort({ date: -1 });
+    
+    if (!intake) {
+      intake = new WaterIntake();
+    }
+    
+    intake.totalWater += waterConsumed;
+    intake.lastWater = waterConsumed;
+    await intake.save();
 
-    const totalWater = await WaterTracker.aggregate([
-      {
-        $match: {
-          userId: mongoose.Types.ObjectId(userId),
-          date: { $gte: today }
-        }
-      },
-      {
-        $group: {
-          _id: null,
-          totalWater: { $sum: '$waterConsumed' }
-        }
-      }
-    ]);
-
-    res.status(200).json({ totalWater: totalWater[0]?.totalWater || 0 });
+    res.json({ message: 'Water intake added', intake });
   } catch (error) {
-    console.error('Error fetching water intake:', error);
-    res.status(500).json({ error: 'Failed to fetch water intake' });
+    res.status(500).json({ error: 'Error adding water intake' });
+  }
+};
+
+exports.resetWaterIntake = async (req, res) => {
+  try {
+    await WaterIntake.deleteMany({});
+    res.json({ message: 'Water intake reset successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error resetting water intake' });
   }
 };
