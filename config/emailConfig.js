@@ -1,19 +1,19 @@
 const nodemailer = require('nodemailer');
 
-// Configure email transporter
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // You can use any email service (Gmail, Outlook, etc.)
+  host: "smtp.mailgun.org",
+  port: 587, // Use port 465 if you need a secure connection
   auth: {
-    user: 'your-email@gmail.com', // Replace with your email
-    pass: 'your-email-password' // Replace with your email password or App Password
+    user: "postmaster@sandbox2714180e51d34d73a971fcf1e1460aca.mailgun.org",
+    pass: "3fc26dc760c7749fab451a5852ade9bb-1654a412-bbd6add9"
   }
 });
 
-// Function to send email
+// Function to send reminder email
 const sendReminderEmail = async (to, subject, text) => {
   try {
     await transporter.sendMail({
-      from: '"Hydration Reminder" <your-email@gmail.com>',
+      from: '"Reminder Service" <your-email@gmail.com>',
       to,
       subject,
       text

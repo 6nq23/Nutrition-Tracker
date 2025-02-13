@@ -1,27 +1,15 @@
 <%- include('header') %>
 
-<style>
-  .container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-  }
-  input, button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  #reminder-list {
-    margin-top: 20px;
-  }
-</style>
-
 <div class="container">
-  <h2>Set Water Drinking Reminder</h2>
-  
+  <h2>Set Email Reminder</h2>
+
   <form id="reminder-form">
-    <label for="reminder-time">Select Reminder Time:</label>
+    <label for="reminder-text">Reminder:</label>
+    <input type="text" id="reminder-text" placeholder="Enter reminder text..." required>
+
+    <label for="reminder-time">Time:</label>
     <input type="time" id="reminder-time" required>
+
     <button type="submit">Set Reminder</button>
   </form>
 
@@ -30,37 +18,63 @@
 </div>
 
 <script>
-    document.getElementById('reminder-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-  
-      const userId = "<%= userId %>"; // Fetch userId from EJS
-      const reminderTime = document.getElementById('reminder-time').value;
-  
-      if (!reminderTime) {
-        alert('Please select a time.');
+  // Function to fetch user reminders and display them
+  async function fetchReminders() {
+    try {
+      const response = await fetch('/api/email-reminders?userId=<%= userId %>');
+      const reminders = await response.json();
+
+      const reminderList = document.getElementById('reminder-list');
+      reminderList.innerHTML = '';
+
+      if (reminders.length === 0) {
+        reminderList.innerHTML = '<li>No reminders set.</li>';
         return;
       }
-  
-      try {
-        const response = await fetch('/api/email-reminder', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId, reminderTime })
-        });
-  
-        const data = await response.json();
-        
-        if (response.ok) {
-          alert('Reminder set successfully!');
-          fetchReminders();
-        } else {
-          alert(`Failed to set reminder: ${data.error}`);
-        }
-      } catch (error) {
-        console.error('Error setting reminder:', error);
-        alert('Failed to set reminder.');
+
+      reminders.forEach(reminder => {
+        const li = document.createElement('li');
+        li.textContent = `${reminder.reminderText} at ${reminder.reminderTime}`;
+        reminderList.appendChild(li);
+      });
+    } catch (error) {
+      console.error('Error fetching reminders:', error);
+    }
+  }
+
+  // Function to handle form submission
+  document.getElementById('reminder-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const reminderText = document.getElementById('reminder-text').value;
+    const reminderTime = document.getElementById('reminder-time').value;
+    const userId = "<%= userId %>"; // Ensure userId is available
+
+    try {
+      const response = await fetch('/api/email-reminder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, reminderText, reminderTime })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Server error: ${errorText}`);
       }
-    });
-  </script>
+
+      const data = await response.json();
+      alert('Reminder set successfully!');
+
+      fetchReminders(); // ✅ Now this function is properly defined
+    } catch (error) {
+      console.error('Error setting reminder:', error);
+      alert('Failed to set reminder. See console for details.');
+    }
+  });
+
+  // Fetch reminders when the page loads
+  fetchReminders();
+</script>
+
   
 <%- include('footer') %>

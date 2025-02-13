@@ -20,7 +20,9 @@ const bmiRoutes = require('./routes/bmiRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
-const favicon = require("serve-favicon");
+const emailReminderRoutes = require('./routes/emailReminderRoutes');
+
+// const favicon = require("serve-favicon");
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -66,6 +68,8 @@ app.use('/users', usersRouter);
 app.use(waterTrackerRoutes);
 app.use(bmiRoutes);
 app.use(progressRoutes);
+app.use(emailReminderRoutes);
+
 
 // Start server
 const PORT = 3000;

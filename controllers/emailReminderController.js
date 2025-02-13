@@ -1,17 +1,13 @@
 const EmailReminder = require('../models/EmailReminder');
-const User = require('../models/Users'); // Import the User model
+const User = require('../models/Users');
 const sendReminderEmail = require('../config/emailConfig');
 
 // Set a new reminder
 exports.setReminder = async (req, res) => {
   try {
-    const { userId, reminderTime } = req.body; // Get userId from request body
+    const { userId, reminderText, reminderTime } = req.body;
 
-    if (!userId) {
-      return res.status(400).json({ error: 'User ID is required' });
-    }
-
-    // Fetch user email from the database
+    // Fetch user email from database
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
@@ -20,7 +16,8 @@ exports.setReminder = async (req, res) => {
     // Save reminder in DB
     const reminder = new EmailReminder({
       userId,
-      email: user.email, // Get email from database
+      email: user.email,
+      reminderText,
       reminderTime
     });
 
@@ -30,5 +27,17 @@ exports.setReminder = async (req, res) => {
   } catch (error) {
     console.error('Error setting reminder:', error);
     res.status(500).json({ error: 'Failed to set reminder' });
+  }
+};
+
+// Fetch user reminders
+exports.getReminders = async (req, res) => {
+  try {
+    const { userId } = req.query;
+    const reminders = await EmailReminder.find({ userId });
+    res.status(200).json(reminders);
+  } catch (error) {
+    console.error('Error fetching reminders:', error);
+    res.status(500).json({ error: 'Failed to fetch reminders' });
   }
 };
