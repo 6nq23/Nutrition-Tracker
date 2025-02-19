@@ -21,8 +21,8 @@ const progressRoutes = require('./routes/progressRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const emailReminderRoutes = require('./routes/emailReminderRoutes');
-
-// const favicon = require("serve-favicon");
+const path = require('path');
+const favicon = require("serve-favicon");
 const app = express();
 // Connect to MongoDB
 connectDB();
@@ -40,12 +40,10 @@ app.use(session({
     cookie: { secure: false }   // Set 'secure' to true in production (HTTPS only)
 }));
 
-// app.use(favicon(path.join(__dirname, "public", "img")));
-
-
 // Set EJS
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'image_logo.png')));
 
 // Routes
 app.use('/dashboard',dashboardRoutes);
