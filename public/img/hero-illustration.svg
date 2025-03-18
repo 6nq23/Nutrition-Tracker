@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600px" height="500px" viewBox="0 0 600 500" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Background Elements -->
+        <circle fill="#E8F5E9" cx="300" cy="250" r="200" opacity="0.8"></circle>
+        <circle fill="#C8E6C9" cx="350" cy="200" r="80" opacity="0.6"></circle>
+        
+        <!-- Plate -->
+        <ellipse fill="#FFFFFF" cx="300" cy="320" rx="150" ry="40"></ellipse>
+        <ellipse stroke="#DDDDDD" stroke-width="2" fill="#F5F5F5" cx="300" cy="310" rx="130" ry="30"></ellipse>
+        
+        <!-- Healthy Food Items -->
+        <!-- Apple -->
+        <circle fill="#FF5252" cx="220" cy="280" r="25"></circle>
+        <path d="M220,255 C218,255 216,256 215,258" stroke="#795548" stroke-width="2" stroke-linecap="round"></path>
+        <path d="M225,260 L230,245" stroke="#795548" stroke-width="2" stroke-linecap="round"></path>
+        
+        <!-- Broccoli -->
+        <circle fill="#388E3C" cx="270" cy="270" r="20"></circle>
+        <circle fill="#4CAF50" cx="260" cy="260" r="12"></circle>
+        <circle fill="#4CAF50" cx="280" cy="260" r="14"></circle>
+        <rect fill="#A5D6A7" x="267" y="285" width="6" height="20" rx="2"></rect>
+        
+        <!-- Salmon -->
+        <path d="M320,280 C360,265 380,275 370,295 C360,310 330,305 320,280 Z" fill="#FF8A65"></path>
+        <path d="M330,285 L350,285" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5"></path>
+        
+        <!-- Avocado -->
+        <ellipse fill="#689F38" cx="370" cy="275" rx="18" ry="22"></ellipse>
+        <ellipse fill="#FFF59D" cx="370" cy="275" rx="10" ry="12"></ellipse>
+        <circle fill="#795548" cx="370" cy="275" r="5"></circle>
+        
+        <!-- Water Glass -->
+        <path d="M150,300 L160,350 L180,350 L190,300 Z" fill="#BBDEFB" opacity="0.8"></path>
+        <line x1="150" y1="300" x2="190" y2="300" stroke="#90CAF9" stroke-width="2"></line>
+        <line x1="160" y1="350" x2="180" y2="350" stroke="#90CAF9" stroke-width="2"></line>
+        
+        <!-- Measuring Tape -->
+        <path d="M400,300 C450,270 500,280 520,320" stroke="#FFC107" stroke-width="8" stroke-linecap="round" fill="none"></path>
+        <path d="M400,300 L405,315" stroke="#FFC107" stroke-width="2"></path>
+        <path d="M420,295 L425,310" stroke="#FFC107" stroke-width="2"></path>
+        <path d="M440,290 L445,305" stroke="#FFC107" stroke-width="2"></path>
+        <path d="M460,290 L465,305" stroke="#FFC107" stroke-width="2"></path>
+        <path d="M480,295 L485,310" stroke="#FFC107" stroke-width="2"></path>
+        <path d="M500,305 L505,320" stroke="#FFC107" stroke-width="2"></path>
+        
+        <!-- Chart Elements -->
+        <rect fill="#F5F5F5" stroke="#DDDDDD" x="100" y="120" width="150" height="100" rx="5"></rect>
+        <line x1="120" y1="200" x2="120" y2="140" stroke="#BDBDBD" stroke-width="1"></line>
+        <line x1="150" y1="200" x2="150" y2="140" stroke="#BDBDBD" stroke-width="1"></line>
+        <line x1="180" y1="200" x2="180" y2="140" stroke="#BDBDBD" stroke-width="1"></line>
+        <line x1="210" y1="200" x2="210" y2="140" stroke="#BDBDBD" stroke-width="1"></line>
+        <line x1="110" y1="190" x2="240" y2="190" stroke="#BDBDBD" stroke-width="1"></line>
+        <line x1="110" y1="170" x2="240" y2="170" stroke="#BDBDBD" stroke-width="1"></line>
+        <line x1="110" y1="150" x2="240" y2="150" stroke="#BDBDBD" stroke-width="1"></line>
+        
+        <!-- Chart Bars -->
+        <rect fill="#4CAF50" x="125" y="170" width="10" height="20"></rect>
+        <rect fill="#4CAF50" x="155" y="150" width="10" height="40"></rect>
+        <rect fill="#4CAF50" x="185" y="160" width="10" height="30"></rect>
+        <rect fill="#4CAF50" x="215" y="145" width="10" height="45"></rect>
+        
+        <!-- Fitness Tracker Watch -->
+        <rect fill="#455A64" x="450" y="150" width="40" height="60" rx="8"></rect>
+        <rect fill="#263238" x="455" y="155" width="30" height="40" rx="3"></rect>
+        <path d="M455,175 L485,175" stroke="#4FC3F7" stroke-width="2"></path>
+        <path d="M470,155 L470,195" stroke="#4FC3F7" stroke-width="2"></path>
+        <rect fill="#CFD8DC" x="465" y="165" width="10" height="10" rx="2"></rect>
+        <path d="M445,150 L435,130" stroke="#455A64" stroke-width="5" stroke-linecap="round"></path>
+        <path d="M495,150 L505,130" stroke="#455A64" stroke-width="5" stroke-linecap="round"></path>
+        
+        <!-- Fruits Basket -->
+        <ellipse fill="#8D6E63" cx="380" cy="140" rx="50" ry="20"></ellipse>
+        <circle fill="#F44336" cx="360" cy="130" r="12"></circle> <!-- Apple -->
+        <circle fill="#FFEB3B" cx="385" cy="125" r="15"></circle> <!-- Lemon -->
+        <ellipse fill="#7CB342" cx="405" cy="130" rx="15" ry="10"></ellipse> <!-- Lime -->
+        <path d="M370,120 C380,110 390,110 400,120" stroke="#8D6E63" stroke-width="3" fill="none"></path> <!-- Basket Handle -->
+    </g>
+</svg> 

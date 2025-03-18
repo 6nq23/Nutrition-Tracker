@@ -68,5 +68,5 @@ app.use(bmiRoutes);
 app.use(progressRoutes);
 
 // Start server
-const PORT = 3000;
+const PORT = 3003;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

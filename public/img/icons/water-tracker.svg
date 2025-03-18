@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <circle fill="#E8F5E9" cx="40" cy="40" r="40"/>
+    <path d="M40,15 C40,15 30,35 30,50 C30,58.2843 34.4772,65 40,65 C45.5228,65 50,58.2843 50,50 C50,35 40,15 40,15 Z" stroke="#2196F3" stroke-width="2"/>
+    <path d="M40,15 C40,15 30,35 30,50 C30,50.5 30.0276,50.9935 30.082,51.48 C30.082,51.48 36,48 40,54 C44,60 49.918,51.48 49.918,51.48 C49.9724,50.9935 50,50.5 50,50 C50,35 40,15 40,15 Z" fill="#2196F3"/>
+    <path d="M33,38 C34.5,35 40,33 40,33" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round"/>
+  </g>
+</svg> 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <circle fill="#E8F5E9" cx="40" cy="40" r="40"/>
+    <path d="M55,30 L55,55 C55,56.1046 54.1046,57 53,57 L27,57 C25.8954,57 25,56.1046 25,55 L25,30" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+    <rect fill="#4CAF50" x="25" y="23" width="30" height="7" rx="2"/>
+    <path d="M30,35 L35,35" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+    <path d="M38,35 L50,35" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+    <path d="M30,41 L42,41" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+    <path d="M45,41 L50,41" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+    <path d="M30,47 L32,47" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+    <path d="M35,47 L50,47" stroke="#4CAF50" stroke-width="2" stroke-linecap="round"/>
+    <circle fill="#FF5252" cx="60" cy="23" r="8"/>
+    <text fill="#FFFFFF" font-family="Arial-BoldMT, Arial" font-size="10" font-weight="bold">
+      <tspan x="57" y="26">+</tspan>
+    </text>
+  </g>
+</svg> 
