@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -375,4 +376,348 @@
 </script>
 
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="icon" type="image/png" href="/image_logo.png">
+
+  <style>
+    /* General Styles */
+    body.light {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f8fb;
+      color: #333;
+    }
+
+    /* Header Styles */
+    .dashboard-header {
+      text-align: center;
+      padding: 50px 0;
+      background-color: #E6E6FA;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .dashboard-header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    /* Main Section */
+    .dashboard-main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    /* Welcome Section */
+    .welcome-section h2 {
+      font-size: 2.5rem;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .welcome-section p {
+      font-size: 1.2rem;
+    }
+
+    /* Overview Section */
+    .overview-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    .overview-cards {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 30%;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Features Section */
+    .features-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    .features-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .feature-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 22%;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: #007bff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    /* Hover Effects */
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Footer Styles */
+    .dashboard-footer {
+      text-align: center;
+      background-color: #E6E6FA;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .dashboard-footer p {
+      color: #333;
+      font-size: 1rem;
+    }
+
+    body.dark {
+      background-color: #121212;
+      color: #0880f0;
+    }
+
+    .toggle-button{
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .overview-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+
+      .features-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .feature-card {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+    }
+
+    .overview-section p{
+      font-size: 1.7rem;
+    }
+    
+    /* Animations */
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+  </style>
+</head>
+<body class= "<%= theme %>" >
+  <!-- Header Section -->
+  <header class="dashboard-header">
+    <h1>Welcome to Nutri Track</h1>
+    <p>Your personalized health and fitness tracker</p>
+  </header>
+
+  <!-- Main Content Section -->
+  <main class="dashboard-main">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+      <h2>Hello, <%= user || 'User' %>!</h2>
+      <p>Track your health and access personalized features below:</p>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview-section">
+      <h2>Overview</h2>
+      <div class="overview-cards">
+        <div class="card animate_animated animate_fadeInLeft">
+          <h3>BMI</h3>
+          <p><%= bmi %></p>
+        </div>
+        <div class="card animate_animated animate_fadeInUp">
+          <h3>Calories</h3>
+          <p><%= calories %></p>
+        </div>
+        <div class="card animate_animated animate_fadeInRight">
+          <h3>Steps</h3>
+          <p><%= steps %></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="search-container" style="text-align: center; margin-bottom: 20px;">
+      <input type="text" id="search-bar" placeholder="Search features..." style="padding: 10px; width: 80%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc;">
+      <button id="search-button">Search</button>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <h2>Features</h2>
+      <div class="features-grid">
+
+        <a href="/admin" class="feature-card animate_animated animate_zoomIn">
+          <h3>Admin</h3>
+        </a>
+
+        <a href="/bmi-calculator" class="feature-card animate_animated animate_zoomIn">
+          <h3>BMI Calculator</h3>
+        </a>
+        <a href="/calorie-tracker" class="feature-card animate_animated animate_zoomIn">
+          <h3>Calorie Tracker</h3>
+        </a>
+        <a href="/meal-selection" class="feature-card animate_animated animate_zoomIn">
+          <h3>Meal Selection</h3>
+        </a>
+        <a href="/diet-plan" class="feature-card animate_animated animate_zoomIn">
+          <h3>Diet Plan Generator</h3>
+        </a>
+        <a href="/meal-reminders" class="feature-card animate_animated animate_zoomIn">
+          <h3>Meal Reminders</h3>
+        </a>
+        <a href="/progress-tracker" class="feature-card animate_animated animate_zoomIn">
+          <h3>Progress Tracker</h3>
+        </a>
+        <a href="/notifications" class="feature-card animate_animated animate_zoomIn">
+          <h3>Notifications & Alerts</h3>
+        </a>
+        <a href="/dark_mode" class="feature-card animate_animated animate_zoomIn">
+          <h3>Dark Mode/Theme Toggle</h3>
+        </a>
+        <a href="/fitness-challenge" class="feature-card animate_animated animate_zoomIn">
+          <h3>Fitness Challenge</h3>
+        </a>
+        <a href="/step-tracker" class="feature-card animate_animated animate_zoomIn">
+          <h3>Step Tracker</h3>
+        </a>
+        <a href="/sleep-tracker" class="feature-card animate_animated animate_zoomIn">
+          <h3>Sleep Tracker</h3>
+        </a>
+        <a href="/water-intake" class="feature-card animate_animated animate_zoomIn">
+          <h3>Water Intake</h3>
+        </a>
+        <a href="/feedback" class="feature-card animate_animated animate_zoomIn">
+          <h3>FeedBack</h3>
+        </a>
+
+        <a href="/email-reminder" class="feature-card animate_animated animate_zoomIn">
+          <h3>Email Reminder</h3>
+        </a>
+
+        <a href="/logout" class="feature-card animate_animated animate_zoomIn">
+          <h3>Logout</h3>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <div class="toggle-button">
+    <button id="theme-toggle">Toggle Dark Mode</button>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="dashboard-footer">
+    <p>&copy; 2025 Nutri Track. All rights reserved.</p>
+  </footer>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+
+    themeToggle.addEventListener('click', async () => {
+      // Get the current theme
+      const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+
+      // Toggle theme locally
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.body.className = newTheme;
+
+      // Save the new theme preference to the server
+      try {
+        const response = await fetch('/api/theme', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ theme: newTheme })
+        });
+
+        if (!response.ok) {
+          alert('Failed to save theme preference');
+        }
+      } catch (error) {
+        console.error('Error saving theme preference:', error);
+      }
+    });
+  </script>
+
+<script>
+  document.getElementById('search-bar').addEventListener('input', function() {
+    let searchQuery = this.value.toLowerCase();
+    let featureCards = document.querySelectorAll('.feature-card');
+
+    featureCards.forEach(card => {
+      let featureName = card.textContent.toLowerCase();
+      if (featureName.includes(searchQuery)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+</body>
+>>>>>>> 030c7650c21a1a4997212181e2d5a12ca737d3e1
 </html>

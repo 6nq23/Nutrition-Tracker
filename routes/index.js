@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     res.render('index', { username });  // Send userName to the template
 });
 
-router.get('/admin', (req, res) => {
+router.get('/admin', isAuthenticated, (req, res) => {
     const username = req.user ? req.user.username : null; // Assuming you have user details from session or DB
     res.render('admin', { username });  // Send userName to the template
 });

@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { setReminder, getReminders } = require('../controllers/emailReminderController');
 
-// Set new reminder (userId is required in request body)
+// Set a new reminder
 router.post('/api/email-reminder', setReminder);
 
-// Get all reminders
+// Get all reminders for a user
 router.get('/api/email-reminders', getReminders);
 
 module.exports = router;

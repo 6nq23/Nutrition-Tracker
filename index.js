@@ -20,6 +20,8 @@ const bmiRoutes = require('./routes/bmiRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
+const emailReminderRoutes = require('./routes/emailReminderRoutes');
+const path = require('path');
 const favicon = require("serve-favicon");
 const app = express();
 // Connect to MongoDB
@@ -38,12 +40,10 @@ app.use(session({
     cookie: { secure: false }   // Set 'secure' to true in production (HTTPS only)
 }));
 
-// app.use(favicon(path.join(__dirname, "public", "img")));
-
-
 // Set EJS
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'image_logo.png')));
 
 // Routes
 app.use('/dashboard',dashboardRoutes);
@@ -66,6 +66,8 @@ app.use('/users', usersRouter);
 app.use(waterTrackerRoutes);
 app.use(bmiRoutes);
 app.use(progressRoutes);
+app.use(emailReminderRoutes);
+
 
 // Start server
 const PORT = 3003;
