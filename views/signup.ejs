@@ -8,14 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
+<style>
         :root {
             --primary: #0056b3;
             --primary-light: #3a7abd;
             --primary-dark: #003b7a;
             --secondary: #00c6ff;
             --accent: #28a745;
-            --danger: #dc3545;
             --dark: #333;
             --gray: #6c757d;
             --light-gray: #e9ecef;
@@ -26,8 +25,8 @@
         }
 
         * {
-            margin: 0;
-            padding: 0;
+        margin: 0;
+        padding: 0;
             box-sizing: border-box;
         }
 
@@ -36,7 +35,7 @@
             background-color: var(--light);
             height: 100vh;
             overflow-x: hidden;
-            display: flex;
+        display: flex;
             flex-direction: column;
             position: relative;
         }
@@ -69,13 +68,13 @@
         @keyframes patternMove {
             0% { transform: translate(0, 0); }
             100% { transform: translate(50%, 50%); }
-        }
+    }
 
-        .container {
+    .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            width: 100%;
+        width: 100%;
         }
 
         /* Header */
@@ -83,8 +82,8 @@
             padding: 15px 0;
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
-        }
+        margin-bottom: 20px;
+    }
 
         .logo {
             display: flex;
@@ -109,7 +108,7 @@
         /* Main Content */
         .main {
             flex: 1;
-            display: flex;
+        display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -117,7 +116,7 @@
 
         .auth-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -127,7 +126,6 @@
             transition: transform 0.5s ease, box-shadow 0.5s ease;
             position: relative;
             z-index: 10;
-            margin-bottom: 30px;
         }
 
         .auth-container:hover {
@@ -174,7 +172,7 @@
         .auth-header h2 {
             font-size: 28px;
             color: var(--white);
-            margin-bottom: 5px;
+        margin-bottom: 5px;
             position: relative;
             z-index: 1;
         }
@@ -190,12 +188,6 @@
             padding: 40px;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
         .form-group {
             margin-bottom: 25px;
             position: relative;
@@ -204,14 +196,14 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 14px;
+        font-size: 14px;
             color: var(--dark);
             font-weight: 500;
             transition: var(--transition);
         }
 
         .form-control {
-            width: 100%;
+        width: 100%;
             padding: 15px 20px;
             padding-left: 45px;
             font-size: 15px;
@@ -226,7 +218,7 @@
         .form-control:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
-            outline: none;
+        outline: none;
         }
 
         .form-icon {
@@ -254,58 +246,19 @@
             color: var(--primary);
         }
 
-        .password-strength {
-            height: 5px;
-            margin-top: 5px;
-            border-radius: 3px;
-            background-color: var(--light-gray);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .password-strength-meter {
-            height: 100%;
-            width: 0;
-            border-radius: 3px;
-            transition: width 0.3s ease, background-color 0.3s ease;
-        }
-
-        .password-strength-text {
-            font-size: 12px;
-            margin-top: 5px;
-            text-align: right;
-            color: var(--gray);
-        }
-
-        .password-match-status {
-            font-size: 12px;
-            margin-top: 5px;
-            text-align: right;
-            color: var(--gray);
-            transition: var(--transition);
-        }
-
-        .password-match-status.match {
-            color: var(--accent);
-        }
-
-        .password-match-status.mismatch {
-            color: var(--danger);
-        }
-
         .btn {
             width: 100%;
             padding: 15px;
-            border: none;
+        border: none;
             border-radius: 8px;
-            font-size: 16px;
+        font-size: 16px;
             font-weight: 600;
-            cursor: pointer;
+        cursor: pointer;
             transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             font-family: 'Poppins', sans-serif;
             position: relative;
             overflow: hidden;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .btn-primary {
@@ -360,8 +313,8 @@
         .auth-divider-text {
             padding: 0 15px;
             color: var(--gray);
-            font-size: 14px;
-        }
+        font-size: 14px;
+    }
 
         .social-login {
             display: flex;
@@ -414,62 +367,30 @@
 
         .auth-footer a {
             color: var(--primary);
-            text-decoration: none;
+        text-decoration: none;
             font-weight: 500;
             transition: var(--transition);
-        }
+    }
 
         .auth-footer a:hover {
             color: var(--primary-dark);
-            text-decoration: underline;
-        }
-
-        /* Terms & Conditions Checkbox */
-        .checkbox-container {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-            gap: 10px;
-        }
-
-        .checkbox-container input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-top: 3px;
-            accent-color: var(--primary);
-        }
-
-        .checkbox-container label {
-            font-size: 14px;
-            color: var(--dark);
-            line-height: 1.4;
-        }
-
-        .checkbox-container a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .checkbox-container a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
+        text-decoration: underline;
+    }
 
         /* Form Validation */
         .form-error {
             display: none;
             font-size: 12px;
-            color: var(--danger);
+            color: #e74c3c;
             margin-top: 5px;
         }
 
         .form-control.error {
-            border-color: var(--danger);
+            border-color: #e74c3c;
         }
 
         .form-control.error + .form-icon {
-            color: var(--danger);
+            color: #e74c3c;
         }
 
         .form-control.success {
@@ -542,8 +463,7 @@
         }
 
         body.dark-mode label, 
-        body.dark-mode .auth-footer,
-        body.dark-mode .checkbox-container label {
+        body.dark-mode .auth-footer {
             color: #e2e8f0;
         }
 
@@ -576,13 +496,33 @@
             color: #e2e8f0;
         }
 
+        /* Password Strength Meter */
+        .password-strength {
+            display: none;
+            margin-top: 8px;
+            height: 5px;
+            border-radius: 5px;
+            background-color: #ddd;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .password-strength-meter {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.3s ease, background-color 0.3s ease;
+            width: 0;
+        }
+
+        .password-strength-text {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 5px;
+            text-align: right;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
             .auth-body {
                 padding: 30px;
             }
@@ -631,20 +571,11 @@
                 padding: 12px;
                 font-size: 15px;
             }
-
-            .checkbox-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .checkbox-container input[type="checkbox"] {
-                margin-top: 0;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
         <!-- Header with Logo -->
         <header class="header">
             <a href="/" class="logo">
@@ -657,51 +588,43 @@
         <main class="main">
             <div class="auth-container">
                 <div class="auth-header">
-                    <h2>Create Your Account</h2>
-                    <p>Join NutriTreck and start your health journey today</p>
+                    <h2>Create Account</h2>
+                    <p>Join us on your health journey</p>
                 </div>
                 <div class="auth-body">
                     <form id="signupForm" action="/auth/signup" method="POST">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" id="username" name="username" class="form-control" placeholder="Choose a username" required>
-                                <i class="fas fa-user form-icon"></i>
-                                <div class="form-error">Please choose a valid username</div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
-                                <i class="fas fa-envelope form-icon"></i>
-                                <div class="form-error">Please enter a valid email</div>
-                            </div>
+                        <div class="form-group">
+        <label for="username">Username</label>
+                            <input type="text" id="username" name="username" class="form-control" placeholder="Choose a username" required>
+                            <i class="fas fa-user form-icon"></i>
+                            <div class="form-error">Please enter a valid username</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                            <i class="fas fa-envelope form-icon"></i>
+                            <div class="form-error">Please enter a valid email</div>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Create a strong password" required>
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Create a password" required>
                             <i class="fas fa-lock form-icon"></i>
                             <i class="fas fa-eye password-toggle" id="togglePassword"></i>
-                            <div class="form-error">Password must be at least 8 characters</div>
                             <div class="password-strength">
-                                <div class="password-strength-meter" id="passwordStrengthMeter"></div>
+                                <div class="password-strength-meter"></div>
                             </div>
-                            <div class="password-strength-text" id="passwordStrengthText">Password strength</div>
+                            <div class="password-strength-text"></div>
+                            <div class="form-error">Password must be at least 8 characters</div>
                         </div>
 
                         <div class="form-group">
                             <label for="confirmPassword">Confirm Password</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Re-enter your password" required>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="Confirm your password" required>
                             <i class="fas fa-lock form-icon"></i>
                             <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
                             <div class="form-error">Passwords do not match</div>
-                            <div class="password-match-status" id="passwordMatchStatus"></div>
-                        </div>
-
-                        <div class="checkbox-container">
-                            <input type="checkbox" id="terms" name="terms" required>
-                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
                         </div>
 
                         <button type="submit" class="btn btn-primary">
@@ -716,11 +639,11 @@
                     <div class="social-login">
                         <button type="button" class="social-btn google">
                             <i class="fab fa-google"></i>
-                            <span>Sign up with Google</span>
+                            <span>Google</span>
                         </button>
                         <button type="button" class="social-btn facebook">
                             <i class="fab fa-facebook-f"></i>
-                            <span>Sign up with Facebook</span>
+                            <span>Facebook</span>
                         </button>
                     </div>
 
@@ -739,122 +662,96 @@
 
     <!-- Scripts -->
     <script>
-        // Form Elements
-        const signupForm = document.getElementById('signupForm');
-        const usernameInput = document.getElementById('username');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('confirmPassword');
-        const passwordStrengthMeter = document.getElementById('passwordStrengthMeter');
-        const passwordStrengthText = document.getElementById('passwordStrengthText');
-        const passwordMatchStatus = document.getElementById('passwordMatchStatus');
-        const termsCheckbox = document.getElementById('terms');
-
         // Toggle Password Visibility
         const togglePassword = document.getElementById('togglePassword');
         const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
 
         togglePassword.addEventListener('click', function() {
-            togglePasswordVisibility(passwordInput, this);
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
         });
 
         toggleConfirmPassword.addEventListener('click', function() {
-            togglePasswordVisibility(confirmPasswordInput, this);
+            const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
         });
-
-        function togglePasswordVisibility(input, icon) {
-            const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
-            input.setAttribute('type', type);
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
-        }
 
         // Password Strength Meter
+        const passwordStrength = document.querySelector('.password-strength');
+        const passwordStrengthMeter = document.querySelector('.password-strength-meter');
+        const passwordStrengthText = document.querySelector('.password-strength-text');
+        
+        passwordInput.addEventListener('focus', function() {
+            passwordStrength.style.display = 'block';
+        });
+        
         passwordInput.addEventListener('input', function() {
-            const password = this.value;
-            const strength = calculatePasswordStrength(password);
-            updatePasswordStrengthUI(strength);
+            const value = this.value;
             
-            // Check if passwords match
-            if(confirmPasswordInput.value) {
-                checkPasswordsMatch();
+            if (value.length > 0) {
+                passwordStrength.style.display = 'block';
+                
+                // Calculate strength
+                let strength = 0;
+                
+                // Length check
+                if (value.length >= 8) strength += 25;
+                
+                // Lowercase letters check
+                if (/[a-z]/.test(value)) strength += 25;
+                
+                // Uppercase letters check
+                if (/[A-Z]/.test(value)) strength += 25;
+                
+                // Numbers and special characters check
+                if (/[0-9\W]/.test(value)) strength += 25;
+                
+                // Update meter
+                passwordStrengthMeter.style.width = strength + '%';
+                
+                // Update color based on strength
+                if (strength <= 25) {
+                    passwordStrengthMeter.style.backgroundColor = '#e74c3c';
+                    passwordStrengthText.textContent = 'Weak';
+                    passwordStrengthText.style.color = '#e74c3c';
+                } else if (strength <= 50) {
+                    passwordStrengthMeter.style.backgroundColor = '#f39c12';
+                    passwordStrengthText.textContent = 'Fair';
+                    passwordStrengthText.style.color = '#f39c12';
+                } else if (strength <= 75) {
+                    passwordStrengthMeter.style.backgroundColor = '#3498db';
+                    passwordStrengthText.textContent = 'Good';
+                    passwordStrengthText.style.color = '#3498db';
+                } else {
+                    passwordStrengthMeter.style.backgroundColor = '#27ae60';
+                    passwordStrengthText.textContent = 'Strong';
+                    passwordStrengthText.style.color = '#27ae60';
+                }
+            } else {
+                passwordStrength.style.display = 'none';
+                passwordStrengthText.textContent = '';
             }
         });
 
-        function calculatePasswordStrength(password) {
-            let strength = 0;
-            
-            // Length check
-            if(password.length >= 8) strength += 25;
-            
-            // Contains lowercase letters
-            if(/[a-z]/.test(password)) strength += 25;
-            
-            // Contains uppercase letters
-            if(/[A-Z]/.test(password)) strength += 25;
-            
-            // Contains numbers or special characters
-            if(/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) strength += 25;
-            
-            return strength;
-        }
-
-        function updatePasswordStrengthUI(strength) {
-            passwordStrengthMeter.style.width = strength + '%';
-            
-            if(strength <= 25) {
-                passwordStrengthMeter.style.backgroundColor = '#dc3545'; // Weak - Red
-                passwordStrengthText.textContent = 'Weak';
-                passwordStrengthText.style.color = '#dc3545';
-            } else if(strength <= 50) {
-                passwordStrengthMeter.style.backgroundColor = '#ffc107'; // Fair - Yellow
-                passwordStrengthText.textContent = 'Fair';
-                passwordStrengthText.style.color = '#ffc107';
-            } else if(strength <= 75) {
-                passwordStrengthMeter.style.backgroundColor = '#17a2b8'; // Good - Blue
-                passwordStrengthText.textContent = 'Good';
-                passwordStrengthText.style.color = '#17a2b8';
-            } else {
-                passwordStrengthMeter.style.backgroundColor = '#28a745'; // Strong - Green
-                passwordStrengthText.textContent = 'Strong';
-                passwordStrengthText.style.color = '#28a745';
-            }
-        }
-
-        // Check if passwords match
-        confirmPasswordInput.addEventListener('input', checkPasswordsMatch);
-
-        function checkPasswordsMatch() {
-            const password = passwordInput.value;
-            const confirmPassword = confirmPasswordInput.value;
-            
-            if(!confirmPassword) {
-                passwordMatchStatus.textContent = '';
-                passwordMatchStatus.classList.remove('match', 'mismatch');
-                return;
-            }
-            
-            if(password === confirmPassword) {
-                passwordMatchStatus.textContent = 'Passwords match';
-                passwordMatchStatus.classList.add('match');
-                passwordMatchStatus.classList.remove('mismatch');
-                confirmPasswordInput.classList.remove('error');
-                confirmPasswordInput.classList.add('success');
-            } else {
-                passwordMatchStatus.textContent = 'Passwords do not match';
-                passwordMatchStatus.classList.add('mismatch');
-                passwordMatchStatus.classList.remove('match');
-                confirmPasswordInput.classList.add('error');
-                confirmPasswordInput.classList.remove('success');
-            }
-        }
-
         // Form Validation
+        const signupForm = document.getElementById('signupForm');
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+
         signupForm.addEventListener('submit', function(e) {
             let isValid = true;
 
-            // Validate username (at least 3 characters)
-            if(usernameInput.value.trim().length < 3) {
+            // Validate username
+            if (usernameInput.value.trim() === '') {
+                showError(usernameInput, 'Please enter a username');
+                isValid = false;
+            } else if (usernameInput.value.length < 3) {
                 showError(usernameInput, 'Username must be at least 3 characters');
                 isValid = false;
             } else {
@@ -862,44 +759,40 @@
             }
 
             // Validate email
-            if(!isValidEmail(emailInput.value)) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value)) {
                 showError(emailInput, 'Please enter a valid email address');
                 isValid = false;
             } else {
                 showSuccess(emailInput);
             }
 
-            // Validate password (at least 8 characters)
-            if(passwordInput.value.length < 8) {
+            // Validate password
+            if (passwordInput.value.trim() === '') {
+                showError(passwordInput, 'Please enter a password');
+                isValid = false;
+            } else if (passwordInput.value.length < 8) {
                 showError(passwordInput, 'Password must be at least 8 characters');
                 isValid = false;
             } else {
                 showSuccess(passwordInput);
             }
 
-            // Validate password match
-            if(passwordInput.value !== confirmPasswordInput.value) {
+            // Validate confirm password
+            if (confirmPasswordInput.value.trim() === '') {
+                showError(confirmPasswordInput, 'Please confirm your password');
+                isValid = false;
+            } else if (confirmPasswordInput.value !== passwordInput.value) {
                 showError(confirmPasswordInput, 'Passwords do not match');
                 isValid = false;
             } else {
                 showSuccess(confirmPasswordInput);
             }
 
-            // Validate terms acceptance
-            if(!termsCheckbox.checked) {
-                isValid = false;
-                alert('Please accept the Terms of Service and Privacy Policy');
-            }
-
-            if(!isValid) {
+            if (!isValid) {
                 e.preventDefault();
             }
         });
-
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
 
         function showError(input, message) {
             const formGroup = input.parentElement;
@@ -964,12 +857,9 @@
         
         socialButtons.forEach(button => {
             button.addEventListener('click', function() {
-                alert('Social signup integration coming soon!');
+                alert('Social login integration coming soon!');
             });
         });
-
-        // Initial call to setup UI elements
-        updatePasswordStrengthUI(0);
     </script>
 </body>
 </html>
