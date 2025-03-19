@@ -4,228 +4,1158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NutriTreck - Health & Nutrition Tracking</title>
-    <link rel="stylesheet" href="/css/homepage.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/svg+xml" href="/img/image.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #00c6ff;
+            --dark: #333;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --white: #ffffff;
+            --gray: #6c757d;
+            --gray-light: #f4f4f4;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition-fast: all 0.3s ease;
+            --transition-slow: all 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s;
+            opacity: 0;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: 0.1s;
+            opacity: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition-fast);
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+            background-color: var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition-fast);
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links li a:hover::after {
+                width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,248,255,0.8) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .hero-content {
+            width: 50%;
+            z-index: 1;
+        }
+
+        .hero-image {
+            width: 50%;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            position: absolute;
+            right: -50px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            background-color: rgba(0, 86, 179, 0.2);
+            bottom: 8px;
+            left: 0;
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--gray);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition-fast);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--primary);
+            transition: var(--transition-fast);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:hover::before {
+            height: 10px;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: rgba(0, 86, 179, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 30px;
+            transition: var(--transition-fast);
+        }
+
+        .feature-card:hover .feature-icon {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: rotate(360deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition-fast);
+        }
+
+        .feature-card a i {
+            margin-left: 5px;
+            transition: var(--transition-fast);
+        }
+
+        .feature-card a:hover {
+            color: var(--secondary);
+        }
+
+        .feature-card a:hover i {
+            transform: translateX(5px);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .cta .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta .btn {
+            background-color: var(--white);
+            color: var(--primary);
+            font-size: 1.1rem;
+            padding: 15px 30px;
+            font-weight: 600;
+            border: 2px solid var(--white);
+        }
+
+        .cta .btn:hover {
+            background-color: transparent;
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            transition: var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition-fast);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(45deg);
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: var(--white);
+        }
+
+        body.dark-mode .navbar {
+            background-color: #222;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .navbar.scrolled {
+            background-color: #222;
+        }
+
+        body.dark-mode .nav-links li a {
+            color: #ddd;
+        }
+
+        body.dark-mode .features {
+            background-color: #222;
+        }
+
+        body.dark-mode .feature-card {
+            background-color: #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .feature-card h3 {
+            color: var(--white);
+        }
+
+        body.dark-mode .feature-card p {
+            color: #bbb;
+        }
+
+        body.dark-mode .section-header h2 {
+            color: var(--white);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .hero-content {
+                width: 55%;
+                padding-right: 20px;
+            }
+
+            .hero-image {
+                width: 45%;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .navbar {
+                padding: 15px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+                gap: 0;
+                height: calc(100vh - 70px);
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .nav-links li a {
+                font-size: 1.1rem;
+                padding: 10px;
+                display: block;
+            }
+
+            .nav-buttons {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 15px;
+                background-color: var(--white);
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .nav-buttons .btn {
+                width: auto;
+                min-width: 120px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 120px 0 40px;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .hero .container {
+                flex-direction: column;
+            }
+
+            .hero-content, .hero-image {
+                width: 100%;
+            }
+
+            .hero-content {
+                padding: 0;
+                margin-bottom: 30px;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+                margin-bottom: 15px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+
+            .hero-image {
+                height: 250px;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .hero-image img {
+                position: static;
+                max-width: 250px;
+                margin: 0 auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                flex-direction: row;
+                gap: 15px;
+            }
+
+            .hero-buttons .btn {
+                min-width: 140px;
+            }
+
+            .features {
+                padding: 60px 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 25px;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .cta {
+                padding: 60px 0;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .cta p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            body.dark-mode .nav-links,
+            body.dark-mode .nav-buttons {
+                background-color: #222;
+            }
+
+            .theme-toggle {
+                bottom: 80px;
+            }
+
+            [data-aos] {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            
+            /* Ensure buttons are easily tappable on mobile */
+            .btn {
+                padding: 12px 25px;
+                touch-action: manipulation;
+            }
+            
+            /* Make feature cards more appealing on mobile */
+            .feature-card {
+                margin-bottom: 5px;
+                transform: none !important;
+                transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            }
+            
+            .feature-card:active {
+                background-color: rgba(0, 86, 179, 0.05);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .logo i {
+                font-size: 24px;
+            }
+
+            .hero {
+                padding: 100px 0 40px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .hero-image {
+                height: 200px;
+            }
+
+            .hero-image img {
+                max-width: 200px;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-header p {
+                font-size: 0.95rem;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .feature-card p {
+                font-size: 0.9rem;
+            }
+
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta p {
+                font-size: 0.95rem;
+            }
+
+            .cta .btn {
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .footer-col h3 {
+                font-size: 1.1rem;
+            }
+
+            .footer-col p,
+            .footer-col ul li a {
+                font-size: 0.9rem;
+            }
+
+            .footer-bottom p {
+                font-size: 0.85rem;
+            }
+
+            .nav-buttons {
+                flex-direction: row;
+                padding: 12px;
+            }
+
+            .nav-buttons .btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-image {
+                height: 180px;
+            }
+
+            .hero-image img {
+                max-width: 180px;
+            }
+
+            .nav-buttons .btn {
+                min-width: 100px;
+            }
+        }
+
+        /* Add styles for better touch interaction */
+        @media (hover: none) and (pointer: coarse) {
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+
+            .feature-card:hover {
+                transform: none;
+            }
+
+            .feature-card:active {
+                transform: scale(0.98);
+            }
+
+            .btn:active {
+                transform: scale(0.95);
+            }
+
+            .nav-links li a::after {
+                display: none;
+            }
+
+            .social-links a:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Add this to optimize the mobile menu */
+        .nav-links.active {
+            left: 0;
+            padding-bottom: 70px; /* Add padding to the bottom to avoid overlap with fixed nav buttons */
+        }
+    </style>
 </head>
 <body>
-<<<<<<< HEAD
     <!-- Custom Cursor -->
     <div class="cursor"></div>
-    
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="/" class="logo">
-                    <img src="/img/image.png" alt="NutriTreck Logo">
-                    <span class="logo-text">NutriTreck</span>
-                </a>
-                
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <ul class="nav-links">
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="/bmi-calculator">BMI Calculator</a></li>
-                    <li><a href="/meal-selection">Meal Plans</a></li>
-                    <li><a href="/diet-plan">Diet Tracker</a></li>
-                    <li><a href="/fitness-challenge">Fitness</a></li>
-                </ul>
-                
-                <div class="auth-buttons">
-                    <a href="/login" class="btn btn-outline">Login</a>
-                    <a href="/signup" class="btn btn-primary">Sign Up</a>
-                </div>
-            </nav>
-=======
+    <div class="cursor-follower"></div>
 
     <!-- Navbar -->
-    <nav>
-        <ul>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Sign Up</a></li>
-            <li><a href="/admin">Admin</a></li>
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="/" class="logo"><i class="fas fa-apple-alt"></i>NutriTreck</a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
             <li><a href="/bmi-calculator">BMI Calculator</a></li>
-            <li><a href="/calorie-tracker">Calorie Calculator</a></li>
-            <li><a href="/meal-selection">Meal Selection</a></li>
-            <li><a href="/diet-plan">Diet Plan Generator</a></li>
-            <li><a href="/progress-tracker">Progress Tracker</a></li>
-            <li><a href="/fitness-challenge">Fitness Challenge</a></li>
-            <li><a href="/water-intake">Water Intake Tracker</a></li>
+                <li><a href="/calorie-tracker">Calorie Tracker</a></li>
+                <li><a href="/meal-selection">Meal Plans</a></li>
+                <li><a href="/fitness-challenge">Fitness</a></li>
         </ul>
+            <div class="nav-buttons">
+                <a href="/login" class="btn btn-outline">Login</a>
+                <a href="/signup" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
     </nav>
 
-    <!-- Dashboard Section -->
-    <div class="dashboard">
-        <h1>Welcome to Nutri Track!</h1>
-        <p>Here are some amazing features we offer:</p>
-    </div>
-    <div class="feature-box-container">
-        <div class="feature-box">
-            <h3><a href="/meal-selection">Meal Selection</a></h3>
-            <p>Calculate your Body Mass Index easily.</p>
->>>>>>> 030c7650c21a1a4997212181e2d5a12ca737d3e1
-        </div>
-    </header>
-    
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Track Your <span>Nutrition</span> Journey Like Never Before</h1>
-                <p>NutriTreck helps you monitor meals, track fitness goals, and maintain a healthy lifestyle with personalized plans and real-time insights.</p>
+        <div class="container" style="display: flex; align-items: center;">
+            <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+                <h1>Your Journey to <span>Better Health</span> Starts Here</h1>
+                <p>Track your nutrition, fitness, and wellness goals all in one place with personalized insights and recommendations.</p>
                 <div class="hero-buttons">
                     <a href="/signup" class="btn btn-primary">Get Started Free</a>
                     <a href="#features" class="btn btn-outline">Explore Features</a>
                 </div>
             </div>
-            <img src="/img/hero-illustration.svg" alt="Health Tracking Illustration" class="hero-image">
+            <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
+                <img src="https://cdn-icons-png.flaticon.com/512/2382/2382461.png" alt="Nutrition Tracking">
+    </div>
         </div>
     </section>
-    
+
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
-            <div class="section-title">
-                <h2>Why Choose NutriTreck</h2>
-                <p>Our comprehensive platform offers everything you need to maintain a healthy lifestyle</p>
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Amazing Features</h2>
+                <p>Discover the tools that will help you achieve your health and nutrition goals</p>
             </div>
-            
+
             <div class="features-grid">
-                <a href="/meal-selection" class="feature-card">
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="100">
                     <div class="feature-icon">
                         <i class="fas fa-utensils"></i>
                     </div>
                     <h3>Meal Selection</h3>
-                    <p>Get a personalized diet plan in minutes tailored to your specific needs and preferences.</p>
-                </a>
-                
-                <a href="/bmi-calculator" class="feature-card">
+                    <p>Get a personalized diet plan tailored to your unique needs and preferences in minutes.</p>
+                    <a href="/meal-selection">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="200">
                     <div class="feature-icon">
                         <i class="fas fa-calculator"></i>
                     </div>
                     <h3>BMI Calculator</h3>
-                    <p>Calculate your Body Mass Index easily and track changes over time.</p>
-                </a>
-                
-                <a href="/calorie-tracker" class="feature-card">
+                    <p>Easily calculate your Body Mass Index and understand what it means for your health.</p>
+                    <a href="/bmi-calculator">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="300">
                     <div class="feature-icon">
                         <i class="fas fa-fire"></i>
                     </div>
                     <h3>Calorie Tracker</h3>
-                    <p>Monitor your daily calorie intake and maintain a balanced diet.</p>
-                </a>
-                
-                <a href="/diet-plan" class="feature-card">
+                    <p>Monitor your daily calorie intake and expenditure to help you reach your weight goals.</p>
+                    <a href="/calorie-tracker">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="400">
                     <div class="feature-icon">
-                        <i class="fas fa-apple-alt"></i>
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
                     <h3>Diet Plan Generator</h3>
-                    <p>Create customized diet plans based on your health goals and dietary requirements.</p>
-                </a>
-                
-                <a href="/meal-reminder" class="feature-card">
+                    <p>Create a customized meal plan based on your dietary restrictions and nutritional needs.</p>
+                    <a href="/diet-plan">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="500">
                     <div class="feature-icon">
                         <i class="fas fa-bell"></i>
-                    </div>
+        </div>
                     <h3>Meal Reminders</h3>
-                    <p>Never miss a meal with timely reminders and notifications.</p>
-                </a>
-                
-                <a href="/fitness-challenge" class="feature-card">
+                    <p>Never miss a meal with customizable timely reminders and notifications.</p>
+                    <a href="/meal-reminder">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="600">
                     <div class="feature-icon">
                         <i class="fas fa-dumbbell"></i>
-                    </div>
+        </div>
                     <h3>Fitness Challenge</h3>
-                    <p>Participate in challenges and stay motivated to achieve your fitness goals.</p>
-                </a>
-                
-                <a href="/step-tracker" class="feature-card">
+                    <p>Join challenges, set milestones, and stay motivated on your fitness journey.</p>
+                    <a href="/fitness-challenge">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="700">
                     <div class="feature-icon">
                         <i class="fas fa-shoe-prints"></i>
-                    </div>
+        </div>
                     <h3>Step Tracker</h3>
-                    <p>Count steps and stay active throughout the day with our easy-to-use tracker.</p>
-                </a>
-                
-                <a href="/sleep-tracker" class="feature-card">
+                    <p>Count your daily steps and track your activity levels to stay motivated and active.</p>
+                    <a href="/step-tracker">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="800">
                     <div class="feature-icon">
                         <i class="fas fa-moon"></i>
-                    </div>
+        </div>
                     <h3>Sleep Tracker</h3>
-                    <p>Analyze and improve your sleep patterns for better health and well-being.</p>
-                </a>
-                
-                <a href="/water-intake" class="feature-card">
+                    <p>Analyze and improve your sleep patterns for better overall health and wellness.</p>
+                    <a href="/sleep-tracker">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+                <div class="feature-card" data-aos="zoom-in" data-aos-delay="900">
                     <div class="feature-icon">
                         <i class="fas fa-tint"></i>
-                    </div>
+        </div>
                     <h3>Water Intake</h3>
-                    <p>Monitor your daily hydration levels and develop healthy drinking habits.</p>
-                </a>
-                
-                <a href="/progress-tracker" class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Progress Tracker</h3>
-                    <p>Visualize your journey with detailed charts and analytics.</p>
-                </a>
-                
-                <a href="/dashboard" class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tachometer-alt"></i>
-                    </div>
-                    <h3>Dashboard</h3>
-                    <p>Access all your health insights and metrics in one centralized place.</p>
-                </a>
-                
-                <a href="/signup" class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-user-plus"></i>
-                    </div>
-                    <h3>User Accounts</h3>
-                    <p>Create your personal profile to save preferences and track long-term progress.</p>
-                </a>
-            </div>
+                    <p>Ensure you're staying properly hydrated throughout the day with our water tracker.</p>
+                    <a href="/water-intake">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+        </div>
         </div>
     </section>
-    
+
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="cta">
         <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Start Your Health Journey?</h2>
-                <p>Join thousands of users who have transformed their lives with NutriTreck's comprehensive health tracking tools.</p>
-                <div class="cta-buttons">
-                    <a href="/signup" class="btn btn-white">Sign Up Free</a>
-                    <a href="/login" class="btn btn-outline-white">Login</a>
-                </div>
-            </div>
+            <h2 data-aos="fade-up">Ready to Transform Your Health?</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Join thousands of users who have already improved their nutrition, fitness, and overall wellness with NutriTreck's comprehensive tracking tools.</p>
+            <a href="/signup" class="btn" data-aos="fade-up" data-aos-delay="200">Start Your Journey Today</a>
         </div>
     </section>
-    
+
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
+            <div class="footer-container">
+                <div class="footer-col">
                     <h3>NutriTreck</h3>
-                    <p>Your comprehensive health and nutrition tracking platform for a better lifestyle.</p>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <p>Your all-in-one platform for health and nutrition tracking, providing personalized insights to help you achieve your wellness goals.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
-                <div class="footer-column">
+                <div class="footer-col">
                     <h3>Features</h3>
-                    <ul class="footer-links">
+                    <ul>
                         <li><a href="/meal-selection">Meal Selection</a></li>
                         <li><a href="/bmi-calculator">BMI Calculator</a></li>
                         <li><a href="/calorie-tracker">Calorie Tracker</a></li>
@@ -233,42 +1163,141 @@
                         <li><a href="/fitness-challenge">Fitness Challenge</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-column">
+                <div class="footer-col">
                     <h3>Resources</h3>
-                    <ul class="footer-links">
+                    <ul>
                         <li><a href="#">Blog</a></li>
-                        <li><a href="#">Guides</a></li>
-                        <li><a href="#">Recipes</a></li>
+                        <li><a href="#">Nutrition Guide</a></li>
                         <li><a href="#">Workout Plans</a></li>
-                        <li><a href="#">Nutrition Facts</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">FAQ</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-column">
-                    <h3>Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Careers</a></li>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="/feedback">Feedback</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
-                <p>&copy; 2023 NutriTreck. All rights reserved.</p>
+                <p>&copy; 2025 NutriTreck. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
-    <!-- Theme Switch -->
-    <div class="theme-switch">
+
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle" id="theme-toggle">
         <i class="fas fa-moon"></i>
     </div>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     
-    <!-- Scripts -->
-    <script src="/js/homepage.js"></script>
+    <!-- Custom Scripts -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true
+        });
+
+        // Toggle Menu
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if(window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            // Change the icon based on theme
+            if(document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+            
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.left = e.clientX + 'px';
+            
+            cursorFollower.style.top = e.clientY + 'px';
+            cursorFollower.style.left = e.clientX + 'px';
+        });
+
+        document.addEventListener('mouseout', () => {
+            cursor.style.opacity = '0';
+            cursorFollower.style.opacity = '0';
+        });
+
+        // Cursor effects for links and buttons
+        const links = document.querySelectorAll('a, button, .theme-toggle');
+        
+        links.forEach(link => {
+            link.addEventListener('mouseover', () => {
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
+                cursorFollower.style.opacity = '0';
+            });
+            
+            link.addEventListener('mouseout', () => {
+                cursor.style.width = '20px';
+                cursor.style.height = '20px';
+                cursorFollower.style.opacity = '1';
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if(navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
